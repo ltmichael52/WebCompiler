@@ -6,7 +6,9 @@
         Online Python Compiler
     </title>
     <link rel="shortcut icon" href="https://www.programiz.com/sites/tutorial2program/files/favicon.png" />
-    <link rel="stylesheet" href="https://fonts.programiz.com/fonts.css" />
+    <mimeMap fileExtension=".woff" mimeType="application/font-woff" />
+    <link rel="stylesheet" type="text/css" href="/fonts/font.css">
+
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
     <link rel="canonical" href="https://www.programiz.com/python-programming/online-compiler/" />
     <meta name="description" content="Write and run your Python code using our online compiler. Enjoy additional features like code sharing, dark mode, and support for multiple programming languages." />
@@ -134,6 +136,12 @@
     <!-- End Google Tag Manager -->
     <!-- Buy sellads CSS-->
     <style>
+
+
+        body {
+            font-family: 'Droid Sans Mono', monospace;
+        }
+
         .pgAdWrapper {
             min-height: 0 !important;
         }
@@ -655,31 +663,40 @@ print("Try programiz.pro")
         // Khởi tạo trình soạn thảo ACE
         var editor = ace.edit("editor");
 
-        // Sự kiện click được viết lại
+        // Vô hiệu hóa chế độ hiển thị khoảng trắng thừa để tránh lỗi hiển thị
+        editor.setShowInvisibles(false);
+
+        // Viết lại sự kiện click
         editor.container.addEventListener('click', function (e) {
-            // Lấy vị trí trên màn hình nơi người dùng nhấp chuột
+            // Lấy vị trí trên màn hình mà người dùng nhấp vào
             var screenPosition = editor.renderer.screenToTextCoordinates(e.clientX, e.clientY);
 
-            // Lấy nội dung dòng tại vị trí hiện tại
+            // Lấy dòng hiện tại và nội dung của nó
             var session = editor.getSession();
             var lineContent = session.getLine(screenPosition.row);
 
-            // Kiểm tra xem vị trí click có nằm ngoài văn bản (khoảng trắng cuối dòng) không
+            // Nếu vị trí click nằm ngoài văn bản (trong khoảng trắng sau dòng)
             if (screenPosition.column > lineContent.length) {
-                // Nếu đúng, di chuyển con trỏ về cuối dòng
-                editor.moveCursorTo(screenPosition.row, lineContent.length);
+                // Di chuyển con trỏ về cuối dòng
+                editor.moveCursorToEnd(screenPosition.row);
             } else {
-                // Nếu không, di chuyển con trỏ đến vị trí click chính xác
+                // Nếu vị trí hợp lệ, di chuyển con trỏ đến vị trí chính xác
                 editor.moveCursorTo(screenPosition.row, screenPosition.column);
             }
+
+            // Đảm bảo hiển thị con trỏ chính xác
+            editor.renderer.scrollCursorIntoView();
         });
 
         // Cấu hình ACE Editor
         editor.setTheme("ace/theme/monokai");
         editor.session.setMode("ace/mode/python");
         editor.session.setOption("wrap", false);  // Tắt tính năng gói từ (word wrap)
-        editor.getSession().setUseWorker(false);  // Tắt chuyển đổi mã thành HTML tự động
+        editor.getSession().setUseWorker(false);  // Tắt việc chuyển đổi mã thành HTML tự động
     </script>
+
+    
+
 
     <!-- The use of the cloudflare cdn for all external libraries is intential. We are trying to reduce the number
          of DNS lookups.
