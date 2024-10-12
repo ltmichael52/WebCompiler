@@ -20,3 +20,10 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+@media screen and (min-width: 800px) {
+    .editor-wrapper, .terminal-wrapper {
+        width: calc(50% - 1px - 28px);
+        float: left;
+        transition: all 0.3s;
+    }
