@@ -1,4 +1,4 @@
-html {
+﻿html {
   font-size: 14px;
 }
 
@@ -27,3 +27,4 @@ body {
         float: left;
         transition: all 0.3s;
     }
+}
