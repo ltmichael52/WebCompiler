@@ -3,14 +3,14 @@
 
     var playStoreUrl =
         "https://play.google.com/store/apps/details?id=com.programiz.learncsharp"
-        appStoreUrl =
-            "https://apps.apple.com/app/apple-store/id1472188189?pt=120228772",
+    appStoreUrl =
+        "https://apps.apple.com/app/apple-store/id1472188189?pt=120228772",
         desktopUrl = "https://www.programiz.com/learn-python";
 
     const desktopAdsButton = document.getElementById("ad-link");
     const mobileAdsButton = document.getElementById("mobile-ad-link");
 
-    const challengeLinkProbability = 0 / 100; // in percentage
+    const challengeLinkProbability = 0 / 100; 
     const hasChallengeLinkAsAds = Math.random() <= challengeLinkProbability;
 
     if (hasChallengeLinkAsAds) {
@@ -40,10 +40,12 @@
 
     document.querySelector('.compiler-pill').innerText = 'Main.cs';
 
+
     // Thêm sự kiện khi người dùng upload file
     document.getElementById('fileInput').addEventListener('change', function (event) {
         var file = event.target.files[0];
         if (file) {
+            uploadedFileName = file.name; // Lưu tên file
             var reader = new FileReader();
             reader.onload = function (e) {
                 var content = e.target.result;
@@ -53,6 +55,31 @@
             reader.readAsText(file);
         } else {
             alert('No file selected');
+        }
+    });
+
+    // Sự kiện download file sau khi biên dịch
+    let uploadedFileName = '';
+    document.getElementById('downloadButton').addEventListener('click', async function () {
+        const code = editor.getValue();
+        const blob = new Blob([code], { type: 'text/plain' });
+        // Tạo một file handle
+        const options = {
+            suggestedName: uploadedFileName || 'Main.cs',
+            types: [{
+                description: 'C# Files',
+                accept: { 'text/plain': ['.cs'] },
+            }],
+        };
+        try {
+            const fileHandle = await window.showSaveFilePicker(options);
+            // Ghi dữ liệu vào file
+            const writable = await fileHandle.createWritable();
+            await writable.write(blob);
+            await writable.close();
+
+        } catch (error) {
+            console.error('Error saving file:', error);
         }
     });
 </script>
