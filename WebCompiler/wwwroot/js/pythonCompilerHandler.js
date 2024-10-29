@@ -152,7 +152,7 @@
                         shared_by: m("browser_id"),
                         user_agent: navigator.userAgent
                     };
-                    return (await fetch("https://compiler-api.programiz.com/api/v1/share", {
+                    return (await fetch("/api/pythoncompiler/compile", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
@@ -417,7 +417,7 @@
                 language: n
             }) => {
                 try {
-                    const i = "/api/pythoncompiler/compile", // API nội bộ của bạn
+                    const i = "/api/pythoncompiler/compile",
                         a = navigator.userAgent;
 
                     const s = {
@@ -436,10 +436,9 @@
                     });
 
                     const result = await response.json();
-                    // Hiển thị kết quả từ biên dịch nội bộ
                     S.setValue(result.output, 1);
                 } catch (e) {
-                    console.error("Lỗi khi biên dịch: ", e);
+                    console.error("Code failed: ", e);
                 }
             })({
                 browserId: "browser_id",
