@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\cdn.playground-v2.programiz.com\**" />
+    <Content Remove="wwwroot\cdn.playground-v2.programiz.com\**" />
+    <EmbeddedResource Remove="wwwroot\cdn.playground-v2.programiz.com\**" />
+    <None Remove="wwwroot\cdn.playground-v2.programiz.com\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
   </ItemGroup>
 
