@@ -3,6 +3,7 @@
 
 <head>
     @await Component.InvokeAsync("Head")
+    
 </head>
 
 <body>
@@ -60,7 +61,7 @@
                     </div>
                     <div class="logo-wrapper">
                         <h1 class="logo-title-wrapper">
-                            <a href="https://www.programiz.com/" target="_blank" class="logo-link">
+                            <a href="https://www.hcmsiu.xyz/" target="_blank" class="logo-link">
                                 <img id="logo" src="https://cdn.playground-v2.programiz.com/assets/logos/logo.svg" />
                                 <span class="logo-sub-title-wrapper">
                                     <span class="logo-sub-title">
@@ -132,11 +133,12 @@
                     </div>
                 </div>
             </div>
+                
                 @await Component.InvokeAsync("SideBar")
-            
 
                 @await Component.InvokeAsync("TopBar")
 
+                
                 @RenderBody()
 
 
@@ -157,7 +159,8 @@
             
         </div>
     </div>
-        @await Component.InvokeAsync("Script")
+
+    @await Component.InvokeAsync("Script")
 </body>
 
 </html>
