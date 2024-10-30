@@ -1,0 +1,152 @@
+﻿<div class="editor-wrapper">
+    <div class="editor-desktop-top-bar">
+        <div class="file-name">
+            Main.cs
+        </div>
+        <div class="desktop-top-bar__btn-wrapper">
+            <!-- Fullscreen toggle button -->
+            <button type="button" id="toggle-expanded-mode-desktop" title="Enter Fullscreen">
+                <img class="toggle-expanded-mode-mobile-icon expand svg" src="https://cdn.playground-v2.programiz.com/assets/icons/expand.svg" />
+                <img class="toggle-expanded-mode-mobile-icon minimize hidden svg" src="https://cdn.playground-v2.programiz.com/assets/icons/minimize.svg" />
+            </button>
+
+            <!-- Upload button -->
+            <button class="upload-button tablet-share" type="button">
+                <input type="file" id="fileInput" accept=".cs">
+                <label for="fileInput">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 50 50" class="upload-icon svg replaced-svg">
+                        <path d="M10.289 32.996a1 1 0 0 0-1 1v6.133a1 1 0 0 0 1 1h28a1 1 0 0 0 1-1v-6.133a1 1 0 1 0-2 0v5.133h-26v-5.133a1 1 0 0 0-1-1z"></path>
+                        <path d="M24.333 34.996a1 1 0 0 0 1-1v-21.51l6.343 6.127a.996.996 0 0 0 1.413-.024 1 1 0 0 0-.024-1.414l-8.023-7.751-.002-.002-.013-.012c-.036-.035-.081-.05-.12-.078-.064-.046-.123-.097-.196-.127a.997.997 0 0 0-.357-.072c-.007 0-.014-.004-.021-.004s-.014.004-.021.004a1.001 1.001 0 0 0-.357.072c-.073.03-.132.081-.196.126-.039.029-.084.044-.12.079l-.012.011-.002.002-8.023 7.751a1 1 0 0 0 1.389 1.438l6.343-6.127v21.51a.998.998 0 0 0 .999 1.001z"></path>
+                    </svg>
+                </label>
+            </button>
+
+            <!-- Dark mode toggle button -->
+            <button type="button" id="toggle-dark-mode-desktop" title="Toggle dark mode">
+                <img class="toggle-dark-mode-mobile-icon moon svg" src="https://cdn.playground-v2.programiz.com/assets/icons/moon.svg" />
+                <img class="toggle-dark-mode-mobile-icon sun svg" src="https://cdn.playground-v2.programiz.com/assets/icons/sun.svg" />
+            </button>
+
+            <!-- Share button -->
+            <button class="share-button" title="Share">
+                <img class="toggle-expanded-mode-mobile-icon svg share-icon" src="https://cdn.playground-v2.programiz.com/assets/icons/share.svg" />
+                Share
+            </button>
+
+            <!-- Run button -->
+            <button class="button-run">
+                <span class="run-text">
+                    &nbsp;Run&nbsp;
+                </span>
+            </button>
+        </div>
+    </div>
+    <button class="mobile-run-button run">
+        Run
+    </button>
+    <div id="editor" contenteditable="true">
+        // C# code editor
+        // Write your C# code here
+        using System;
+        namespace HelloWorld
+        {
+        class Program
+        {
+        static void Main(string[] args)
+        {
+        Console.WriteLine("Hello, C# World!");
+        }
+        }
+        }
+    </div>
+</div>
+
+<style>
+    /* Styles for the upload button */
+    .upload-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        margin-left: 16px;
+        width: 85px;
+        height: 32px;
+        border-radius: 2px;
+        border: 1px solid #d3dce6;
+        background: none;
+        color: #25265eab;
+        cursor: pointer;
+        padding: 6px;
+    }
+
+    .tablet-share {
+        width: 32px;
+    }
+
+    .upload-icon.svg {
+        width: 15px !important;
+        height: 15px !important;
+        display: block;
+    }
+
+    #fileInput {
+        display: none;
+    }
+
+    .upload-button:hover {
+        border-color: #ffffff;
+    }
+
+    .dark-mode .upload-button {
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Style for top-bar */
+    .desktop-top-bar__btn-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        border-top: 1px solid #d3dce6;
+        border-bottom: 1px solid #d3dce6;
+        overflow: hidden;
+    }
+
+    #editor {
+        width: 100%;
+        height: 400px; /* Adjust height as needed */
+        border: 1px solid #d3dce6;
+        padding: 10px;
+        overflow: auto;
+        font-family: 'Courier New', Courier, monospace;
+        background-color: #f7f7f7; /* Light background color */
+    }
+
+    .ace_content {
+        width: 100% !important;
+        height: 100%;
+    }
+</style>
+<script>
+    document.querySelector('.button-run').addEventListener('click', async () => {
+        const code = document.getElementById('editor').innerText; // Get code from the editor
+        const response = await fetch('/csharp', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ Code: code }), // Send the code to the backend
+        });
+
+        const result = await response.json(); // Parse the response
+
+        if (response.ok) {
+            alert(result.Message); // Display success message or any result
+        } else {
+            alert(result.Message); // Display error message
+        }
+    });
+
+</script>

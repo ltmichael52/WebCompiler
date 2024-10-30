@@ -1,4 +1,4 @@
-﻿namespace WebCompiler.Models
+﻿namespace WebCompiler.Request
 {
     public class CompileRequest
     {
