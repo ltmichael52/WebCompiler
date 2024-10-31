@@ -1,71 +1,162 @@
-﻿<script defer type="text/javascript">
-    const lang = "python";
+﻿<!DOCTYPE html>
+<html lang="en">
 
-    var playStoreUrl =
-        "https://play.google.com/store/apps/details?id=com.programiz.learnpython",
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #editor {
+            height: 400px;
+            width: 100%;
+        }
+
+        /* Style cho dropdown gợi ý */
+        .ace_hintcomplete {
+            background-color: #272822;
+            color: #f8f8f2;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .ace_hintcomplete .ace_completion {
+            padding: 5px;
+            border-bottom: 1px solid #49483e;
+        }
+
+        .ace_hintcomplete .ace_completion.ace_selected {
+            background-color: #49483e;
+            color: #ffffff;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ext-language_tools.js"></script>
+</head>
+
+<body>
+    <div id="editor">Console.WriteLine("Hello, World!");</div>
+    <script defer type="text/javascript">
+        const lang = "c#";
+
+        var playStoreUrl =
+            "https://play.google.com/store/apps/details?id=com.programiz.learncsharp"
         appStoreUrl =
             "https://apps.apple.com/app/apple-store/id1472188189?pt=120228772",
-        desktopUrl = "https://www.programiz.com/learn-python";
+            desktopUrl = "https://www.programiz.com/learn-python";
 
-    const desktopAdsButton = document.getElementById("ad-link");
-    const mobileAdsButton = document.getElementById("mobile-ad-link");
+        const desktopAdsButton = document.getElementById("ad-link");
+        const mobileAdsButton = document.getElementById("mobile-ad-link");
 
-    const challengeLinkProbability = 0 / 100; // in percentage
-    const hasChallengeLinkAsAds = Math.random() <= challengeLinkProbability;
+        const challengeLinkProbability = 0 / 100;
+        const hasChallengeLinkAsAds = Math.random() <= challengeLinkProbability;
 
-    if (hasChallengeLinkAsAds) {
-        const baseURL = "https://app.programiz.pro/community-challenges/home"
-        desktopAdsButton.innerHTML = `Python Challenges ❯`;
-        mobileAdsButton.innerHTML = `Python Challenges`;
-        desktopAdsButton.href = baseURL;
-        mobileAdsButton.href = baseURL;
-    } else {
-        const utm = "utm_source=compiler-nav&utm_campaign=programiz&utm_medium=referral"
-        const baseURL = `https://programiz.pro?${utm}`
-
-        desktopAdsButton.innerHTML = `Programiz PRO ❯`;
-        mobileAdsButton.innerHTML = `Programiz PRO`;
-        desktopAdsButton.href = baseURL;
-        mobileAdsButton.href = baseURL;
-    }
-
-    desktopAdsButton.target = "_blank"
-    mobileAdsButton.target = "_blank"
-</script>
-<script>
-    // Khởi tạo Ace Editor
-    var editor = ace.edit("editor");
-    editor.setTheme("ace/theme/monokai");
-    editor.session.setMode("ace/mode/python");
-
-    // Thêm sự kiện khi người dùng upload file
-    document.getElementById('fileInput').addEventListener('change', function (event) {
-        var file = event.target.files[0];
-        if (file) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                var content = e.target.result;
-                // Đưa nội dung file vào Ace Editor
-                editor.setValue(content);
-            };
-            reader.readAsText(file);
+        if (hasChallengeLinkAsAds) {
+            const baseURL = "https://app.programiz.pro/community-challenges/home"
+            desktopAdsButton.innerHTML = `C# Challenges ❯`;
+            mobileAdsButton.innerHTML = `C# Challenges`;
+            desktopAdsButton.href = baseURL;
+            mobileAdsButton.href = baseURL;
         } else {
-            alert('No file selected');
+            const utm = "utm_source=compiler-nav&utm_campaign=programiz&utm_medium=referral"
+            const baseURL = `https://programiz.pro?${utm}`
+
+            desktopAdsButton.innerHTML = `Programiz PRO ❯`;
+            mobileAdsButton.innerHTML = `Programiz PRO`;
+            desktopAdsButton.href = baseURL;
+            mobileAdsButton.href = baseURL;
         }
-    });
-</script>
 
-<!-- The use of the cloudflare cdn for all external libraries is intential. We are trying to reduce the number
-     of DNS lookups.
--->
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+        desktopAdsButton.target = "_blank"
+        mobileAdsButton.target = "_blank"
+    </script>
+    <script>
+        // Khởi tạo Ace Editor
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.session.setMode("ace/mode/csharp");
+        editor.setOptions({
+            enableBasicAutocompletion: true,
+            enableLiveAutocompletion: true,
+            enableSnippets: true
+        });
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<!-- Google Tag Manager (noscript) -->
-<noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TKXT7MH" height="0" width="0"
+        // Thêm phím Tab cho gợi ý hoàn thành mã
+        editor.commands.bindKey("Tab", "startAutocomplete");
+
+        // Trình biên dịch hoàn chỉnh (gợi ý hoàn thành mã)
+        var completeCompliler = {
+            getCompletions: function (editor, session, pos, prefix, callback) {
+                var suggestions = [
+                    { caption: "Console.WriteLine", value: "Console.WriteLine();", meta: "method", score: 1000 },
+                    { caption: "public class", value: "public class ClassName {\n\n}", meta: "snippet", score: 900 },
+                    { caption: "for loop", value: "for (int i = 0; i < length; i++) {\n\n}", meta: "snippet", score: 800 },
+                    { caption: "if statement", value: "if (condition) {\n\n}", meta: "snippet", score: 700 },
+                    { caption: "int", value: "int", meta: "keyword", score: 600 },
+                    { caption: "string", value: "string", meta: "keyword", score: 600 },
+                    { caption: "bool", value: "bool", meta: "keyword", score: 600 },
+                    { caption: "List", value: "List<Type> listName = new List<Type>();", meta: "snippet", score: 500 }
+                ];
+                callback(null, suggestions);
+            }
+        };
+        ace.require("ace/ext/language_tools").addCompleter(completeCompliler);
+
+        // Thêm sự kiện khi người dùng upload file
+        document.getElementById('fileInput').addEventListener('change', function (event) {
+            var file = event.target.files[0];
+            if (file) {
+                uploadedFileName = file.name; // Lưu tên file
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var content = e.target.result;
+                    // Đưa nội dung file vào Ace Editor
+                    editor.setValue(content);
+                };
+                reader.readAsText(file);
+            } else {
+                alert('No file selected');
+            }
+        });
+
+        // Sự kiện download file sau khi biên dịch
+        let uploadedFileName = '';
+        document.getElementById('downloadButton').addEventListener('click', async function () {
+            const code = editor.getValue();
+            const blob = new Blob([code], { type: 'text/plain' });
+            // Tạo một file handle
+            const options = {
+                suggestedName: uploadedFileName || 'Main.cs',
+                types: [{
+                    description: 'C# Files',
+                    accept: { 'text/plain': ['.cs'] },
+                }],
+            };
+            try {
+                const fileHandle = await window.showSaveFilePicker(options);
+                // Ghi dữ liệu vào file
+                const writable = await fileHandle.createWritable();
+                await writable.write(blob);
+                await writable.close();
+
+            } catch (error) {
+                console.error('Error saving file:', error);
+            }
+        });
+    </script>
+
+    <!-- The use of the cloudflare cdn for all external libraries is intential. We are trying to reduce the number
+         of DNS lookups.
+    -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+    <script defer src="https://cdn.playground-v2.programiz.com/build/final.js?v=resize-fixv3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TKXT7MH" height="0" width="0"
             style="display:none;visibility:hidden"></iframe>
-</noscript>
-<!-- End Google Tag Manager (noscript) -->
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+</body>
+
+</html>
