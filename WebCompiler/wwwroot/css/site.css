@@ -1,24 +1,24 @@
-html {
-    font-size: 14px;
+﻿html {
+  font-size: 14px;
 }
 
 @media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
+  html {
+    font-size: 16px;
+  }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-    position: relative;
-    min-height: 100%;
+  position: relative;
+  min-height: 100%;
 }
 
 body {
-    margin-bottom: 60px;
+  margin-bottom: 60px;
 }
 
 @media screen and (min-width: 800px) {
@@ -27,4 +27,138 @@ body {
         float: left;
         transition: all 0.3s;
     }
+}
+
+@media screen and (min-width: 800px) {
+    .share-buttoncode {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .share-buttoncode {
+        display: flex;
+    }
+}
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.input-share-code {
+    display: flex;
+    flex-grow: 1;
+    border: none;
+    background: none;
+    width: 100%;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 0;
+    color: #ffffffde; /* Text color */
+    margin-bottom: 10px; /* Add margin if needed */
+}
+
+.dark-mode .close-modal {
+    color: #ffffff; /* Change the "X" text color to white for dark theme */
+}
+
+/* Setup for the upload button */
+.upload-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    margin-left: 16px;
+    width: 85px;
+    height: 32px;
+    border-radius: 2px;
+    border: 1px solid #d3dce6;
+    background: none;
+    color: #25265eab;
+    cursor: pointer;
+    padding: 6px;
+}
+
+
+.tablet-share {
+    width: 32px;
+}
+
+.upload-icon.svg {
+    width: 15px !important;
+    height: 15px !important;
+    display: block;
+}
+
+#fileInput {
+    display: none;
+}
+
+.upload-button:hover {
+    border-color: #ffffff;
+}
+
+.dark-mode .upload-button {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Style cho top-bar */
+.desktop-top-bar__btn-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border-top: 1px solid #d3dce6;
+    border-bottom: 1px solid #d3dce6;
+    overflow: hidden;
+}
+
+.ace_content {
+    width: 100% !important;
+    height: 100%;
+}
+
+.dark-mode .share-buttoncode {
+    border: 1px solid #ffffff33;
+    background: none;
+    color: #ffffff;
+}
+
+
+.share-buttoncode {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    align-items: center;
+    margin-left: 16px;
+    width: 85px;
+    height: 32px;
+    border-radius: 2px;
+    border: 1px solid #d3dce6;
+    background: none;
+    color: #25265eab;
+    cursor: pointer;
+    padding: 6px;
 }
