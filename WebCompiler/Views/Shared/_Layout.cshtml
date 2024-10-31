@@ -7,7 +7,7 @@
 
 <body>
     <!-- <select id="language-changer"></select> -->
-    <div class="container" id="root" data-lang="python">
+    <div class="container">
         <div class="spinner">
             <div class="loader"><span>{</span><span>}</span></div>
         </div>
@@ -131,14 +131,12 @@
                         <img src="https://cdn.playground-v2.programiz.com/assets/icons/play.svg" alt="run-icon" />
                     </div>
                 </div>
+           
             </div>
                 @await Component.InvokeAsync("SideBar")
-            
 
-                @await Component.InvokeAsync("TopBar")
-
-                @RenderBody()
-
+      
+                 @RenderBody()
 
             <div class="terminal-wrapper">
                 <div class="terminal-desktop-top-bar">
@@ -153,11 +151,17 @@
                 </div>
                 <div id="terminal"></div>
             </div>
+      
 
             
         </div>
+     
     </div>
+        
         @await Component.InvokeAsync("Script")
+
+    <script defer src="~/js/pythonCompilerHandler.js"></script>
 </body>
 
 </html>
+
