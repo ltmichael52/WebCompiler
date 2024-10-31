@@ -1,0 +1,254 @@
+﻿ @model List<CompileHistory>
+
+<div class="sidebar-wrapper" style="width: 200px; color:#FFFFFF;" id="sidebar">
+
+    <div class="custom-select-box " style="border-bottom: groove 1px #ccc;">
+        <div class="header-and-select">
+            <h3 class="d-inline">Language:</h3>
+            <div class="select-box" id="selectBox">
+                <img id="selectedIcon" class="change-lang-btn-icon svg" src="https://cdn.playground-v2.programiz.com/assets/icons/python.svg" alt="Selected Icon">
+            </div>
+        </div>
+        <div class="select-options" id="selectOptions" style="display: none;">
+            <div class="option" data-icon="https://cdn.playground-v2.programiz.com/assets/icons/python.svg">
+                <img class="change-lang-btn-icon svg" src="https://cdn.playground-v2.programiz.com/assets/icons/python.svg" alt="Python Online" />
+            </div>
+            <div class="option" data-icon="https://cdn.playground-v2.programiz.com/assets/icons/csharp.svg">
+                <img class="change-lang-btn-icon svg" src="https://cdn.playground-v2.programiz.com/assets/icons/csharp.svg" alt="C# Online" />
+            </div>
+            <div class="option" data-icon="https://cdn.playground-v2.programiz.com/assets/icons/java.svg">
+                <img class="change-lang-btn-icon svg" src="https://cdn.playground-v2.programiz.com/assets/icons/java.svg" alt="Java Online" />
+            </div>
+            <div class="option" data-icon="https://cdn.playground-v2.programiz.com/assets/icons/javascript.svg">
+                <img class="change-lang-btn-icon svg" src="https://cdn.playground-v2.programiz.com/assets/icons/javascript.svg" alt="JavaScript Online" />
+            </div>
+        </div>
+    </div>
+
+    <div id="compileHistorySection">
+        <partial name="~/Views/Shared/PartialView/PartialCompileHistory.cshtml" model="@Model" />
+    </div>
+
+    <!-- Today Section -->
+    @* <div class="history-category">
+        <p class="time-history-box">Today</p>
+        <ul class="list-group list-group-flush" style="list-style-type: none; padding-left: 0;">
+            <li class="list-group-item history-box">
+                <i class="bi bi-clock-history"></i> Array 2 string
+            </li>
+            <li class="list-group-item history-box">
+                <i class="bi bi-clock-history"></i> Double loop
+            </li>
+        </ul>
+    </div> *@
+    
+    <!-- Yesterday Section -->
+    @* <div class="history-category">
+    <p class="time-history-box">Yesterday</p>
+    <ul class="list-group list-group-flush" style="list-style-type: none; padding-left: 0;">
+    <li class="list-group-item history-box">
+    <i class="bi bi-clock-history"></i> Recursion practice A01
+    </li>
+    </ul>
+    </div>
+
+    <!-- Previous 7 Days Section -->
+    <div class="history-category">
+    <p class="time-history-box">Previous 7 Days</p>
+    <ul class="list-group list-group-flush" style="list-style-type: none; padding-left: 0;">
+    <li class="list-group-item history-box">
+    <i class="bi bi-clock-history"></i> OOP Code knowledge
+    </li>
+    </ul>
+    <ul class="list-group list-group-flush" style="list-style-type: none; padding-left: 0;">
+    <li class="list-group-item history-box">
+    <i class="bi bi-clock-history"></i> DataStruct Practice
+    </li>
+    </ul>
+    </div> *@
+
+</div>
+
+<style>
+    .sidebar-wrapper {
+        height: 85vh; /* Full viewport height */
+        overflow-y: scroll !important; /* Force vertical scroll to always show */
+        scrollbar-width: thin !important; /* Override default scrollbar hiding */
+        scrollbar-color: #474a4f #2d2f33 !important; /* Custom scrollbar colors (thumb and track) */
+    }
+
+        /* Custom Scrollbar Style */
+        .sidebar-wrapper::-webkit-scrollbar {
+            width: 10px !important;
+        }
+
+        /* Scrollbar track (background) */
+        .sidebar-wrapper::-webkit-scrollbar-track {
+            background-color: #2d2f33 !important; /* Background color for scrollbar track */
+            border-radius: 10px !important;
+        }
+
+        /* Scrollbar thumb (the moving part) */
+        .sidebar-wrapper::-webkit-scrollbar-thumb {
+            background-color: #474a4f !important;
+            border-radius: 10px !important;
+        }
+
+            .sidebar-wrapper::-webkit-scrollbar-thumb:hover {
+                background-color: #63676c !important;
+            }
+
+
+    .custom-select-box {
+        position: relative;
+        width: 100%; /* Full width of the parent */
+    }
+
+    .header-and-select {
+        display: flex; /* Use flexbox for horizontal alignment */
+        align-items: center; /* Center items vertically */
+    }
+
+    .select-box {
+        display: flex;
+        align-items: center;
+        background-color: #383b40;
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-left: 10px; /* Space between heading and select box */
+    }
+
+    .select-options {
+        font-weight: 20;
+        position: absolute;
+        top: calc(100% + 5px); /* Position just below the select box */
+        left: 0;
+        right: 0;
+        background-color: #383b40;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        z-index: 1000;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+
+    .option {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        .option:hover {
+            background-color: #0556f3;
+        }
+
+    ul {
+        list-style-type: none; /* Remove the default bullet points */
+        padding-left: 0; /* Optional: removes the default left padding */
+    }
+
+    /* History Box Styling */
+    .history-box {
+        background-color: #2d2f33;
+        border: 1px solid #474a4f;
+        border-radius: 10px;
+        margin: 10px 0; /* Adds space between each box */
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        transition: background-color 0.3s;
+        font-size: 14px;
+    }
+
+        .history-box i {
+            margin-right: 10px; /* Space between icon and text */
+        }
+
+        .history-box:hover {
+            background-color: #3b3e44; /* Change color on hover */
+        }
+
+    /* Category Heading Styling */
+    .history-category h4 {
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-size: 16px;
+        color: #FFFFFF;
+        border-bottom: 1px solid #474a4f;
+        padding-bottom: 5px;
+    }
+
+    .time-history-box{
+        font-size:12px;
+    }
+</style>
+
+<script>
+    const sidebar = document.getElementById('sidebar');
+    let isMouseOverSidebar = false;
+
+    // Track mouse enter and leave events
+    sidebar.addEventListener('mouseenter', () => {
+        isMouseOverSidebar = true;
+    });
+
+    sidebar.addEventListener('mouseleave', () => {
+        isMouseOverSidebar = false;
+    });
+
+    // Enable scrolling of the sidebar when using the mouse wheel
+    sidebar.addEventListener('wheel', (event) => {
+        if (isMouseOverSidebar) {
+            sidebar.scrollBy({
+                top: event.deltaY,
+                behavior: 'smooth' // Smooth scrolling
+            });
+            event.preventDefault(); // Prevent default scrolling behavior
+        }
+    });
+
+    // Get elements
+    const selectBox = document.getElementById("selectBox");
+    const selectOptions = document.getElementById("selectOptions");
+    const selectedIcon = document.getElementById("selectedIcon");
+
+    // Toggle the dropdown on click
+    selectBox.addEventListener("click", () => {
+        const isVisible = selectOptions.style.display === "block";
+        selectOptions.style.display = isVisible ? "none" : "block";
+    });
+
+    // Update icon and close dropdown on option click
+    const options = document.querySelectorAll(".option");
+    options.forEach(option => {
+        option.addEventListener("click", (e) => {
+            // Get the SVG element from the selected option
+            const newSVG = option.querySelector("svg").cloneNode(true); // Clone the SVG from the selected option
+
+            // Remove old SVG image
+            const oldImage = selectBox.querySelector("svg");
+            if (oldImage) {
+                selectBox.removeChild(oldImage);
+            }
+
+            // Append the new SVG to the select box
+            selectBox.appendChild(newSVG);
+
+            selectOptions.style.display = "none"; // Hide the options
+        });
+    });
+
+    // Hide the dropdown when clicking outside
+    document.addEventListener("click", (event) => {
+        if (!selectBox.contains(event.target)) {
+            selectOptions.style.display = "none"; // Hide the options if click is outside
+        }
+    });
+
+    
+
+</script>

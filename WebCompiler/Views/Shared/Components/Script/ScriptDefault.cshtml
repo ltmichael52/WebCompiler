@@ -53,6 +53,31 @@
             alert('No file selected');
         }
     });
+
+    //Ajax to save compile history
+    document.querySelector('.custom-modal-save-btn').addEventListener('click', function () {
+        var title = document.getElementById('titleInput').value;
+        var content = document.getElementById('editor').innerText;
+        console.log(title);
+        console.log(content);
+        $.ajax({
+            url: '/CompileHistory/SaveCompileHistory', // Replace with your controller's actual URL
+            type: 'POST',
+            data: {
+                content: content,
+                title: title
+            },
+            success: function (response) {
+                $('#customModal').hide();
+                $('#compileHistorySection').html(response);
+            },
+            error: function (xhr, status, error) {
+                console.error("Error saving compile history:", error);
+                alert("Failed to save compile history.");
+            }
+        });
+    });
+
 </script>
 
 <script>
@@ -104,6 +129,7 @@
 <!-- The use of the cloudflare cdn for all external libraries is intential. We are trying to reduce the number
      of DNS lookups.
 -->
+
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>

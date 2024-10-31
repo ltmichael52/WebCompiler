@@ -1,0 +1,36 @@
+﻿@model List<CompileHistory>
+
+@foreach (CompileHistory cpHistory in Model)
+{
+    <div class="history-category" data-id="@cpHistory.Id">
+        <ul class="list-group list-group-flush" style="list-style-type: none; padding-left: 0;">
+            <li class="list-group-item history-box">
+                <i class="bi bi-clock-history"></i>@cpHistory.Title
+            </li>
+        </ul>
+    </div>
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).on('click', '.history-category', function () {
+        console.log("Hi");
+        var id = $(this).data('id');
+        console.log(id);
+
+        $.ajax({
+            url: '/CompileHistory/showOldCompile',
+            type: 'GET',
+            data: {
+                compileId: id,
+            },
+            success: function (response) {
+                $('#editor').html(response);
+                console.log("done");
+            },
+            error: function (xhr, status, error) {
+                console.error("Error:", error);
+            }
+        });
+    });
+</script>

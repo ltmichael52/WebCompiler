@@ -6,7 +6,7 @@ namespace WebCompiler.ViewComponents
     {
         public IViewComponentResult Invoke()
         {
-            return View();
+            return View("ShareLinkDefault");
         }
     }
 }

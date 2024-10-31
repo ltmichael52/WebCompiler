@@ -1,0 +1,300 @@
+﻿@model CompileHistory
+ 
+<div class="editor-wrapper">
+    <div class="editor-desktop-top-bar">
+        <div class="file-name">
+            main.py
+        </div>
+        <div class="desktop-top-bar__btn-wrapper">
+            <!-- Fullscreen toggle button -->
+            <button type="button" id="toggle-expanded-mode-desktop" title="Enter Fullscreen">
+                <img class="toggle-expanded-mode-mobile-icon expand svg" src="https://cdn.playground-v2.programiz.com/assets/icons/expand.svg" />
+                <img class="toggle-expanded-mode-mobile-icon minimize hidden svg" src="https://cdn.playground-v2.programiz.com/assets/icons/minimize.svg" />
+            </button>
+
+            <!-- Button trigger modal -->
+            <button type="button" id="saveButton" class="upload-button tablet-share">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" class="save-icon">
+                    <path d="M17 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2zm0 16H7V5h10v14zM8 7h8v2H8V7zm2 6h4v2h-4v-2z" />
+                </svg>
+            </button>
+
+            <!-- Modal -->
+            <div class="custom-modal-overlay" id="customModal">
+                <div class="custom-modal-content">
+                    <div class="custom-modal-header">
+                        <h5 class="custom-modal-title">Save Compile History</h5>
+                        <button type="button" class="custom-close-btn" id="closeCustomModal">&times;</button>
+                    </div>
+                    <div class="custom-modal-body">
+                        <label for="titleInput" class="title-label">Title</label>
+                        <input type="text" id="titleInput" class="title-input" />
+                    </div>
+                    <div class="custom-modal-footer">
+                        <button type="button" class="custom-modal-close-btn" id="closeCustomModalFooter">Close</button>
+                        <button type="button" class="custom-modal-save-btn">Save history</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Upload button -->
+            <button class="upload-button tablet-share" type="button">
+                <input type="file" id="fileInput" accept=".txt">
+                <label for="fileInput">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 50 50" class="upload-icon svg replaced-svg">
+                        <path d="M10.289 32.996a1 1 0 0 0-1 1v6.133a1 1 0 0 0 1 1h28a1 1 0 0 0 1-1v-6.133a1 1 0 1 0-2 0v5.133h-26v-5.133a1 1 0 0 0-1-1z"></path>
+                        <path d="M24.333 34.996a1 1 0 0 0 1-1v-21.51l6.343 6.127a.996.996 0 0 0 1.413-.024 1 1 0 0 0-.024-1.414l-8.023-7.751-.002-.002-.013-.012c-.036-.035-.081-.05-.12-.078-.064-.046-.123-.097-.196-.127a.997.997 0 0 0-.357-.072c-.007 0-.014-.004-.021-.004s-.014.004-.021.004a1.001 1.001 0 0 0-.357.072c-.073.03-.132.081-.196.126-.039.029-.084.044-.12.079l-.012.011-.002.002-8.023 7.751a1 1 0 0 0 1.389 1.438l6.343-6.127v21.51a.998.998 0 0 0 .999 1.001z"></path>
+                    </svg>
+                </label>
+            </button>
+
+            <!-- Dark mode toggle button -->
+            <button type="button" id="toggle-dark-mode-desktop" title="Toggle dark mode">
+                <img class="toggle-dark-mode-mobile-icon moon svg" src="https://cdn.playground-v2.programiz.com/assets/icons/moon.svg" />
+                <img class="toggle-dark-mode-mobile-icon sun svg" src="https://cdn.playground-v2.programiz.com/assets/icons/sun.svg" />
+            </button>
+
+            <!-- Share button -->
+            <button class="share-button" title="Share">
+                <img class="toggle-expanded-mode-mobile-icon svg share-icon" src="https://cdn.playground-v2.programiz.com/assets/icons/share.svg" />
+                Share
+            </button>
+
+            <!-- Run button -->
+            <button class="desktop-run-button run">
+                <span class="run-text">
+                    &nbsp;Run&nbsp;
+                </span>
+            </button>
+        </div>
+    </div>
+    <button class="mobile-run-button run">
+        Run
+    </button>
+
+
+    <div id="editor">
+        <partial name="~/Views/Shared/PartialView/PartialEditor.cshtml" model="@Model" />
+    </div>
+
+    
+</div>
+
+<style>
+   
+
+    /* Thiết lập cho upload button */
+    .upload-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        margin-left: 16px;
+        width: 85px;
+        height: 32px;
+        border-radius: 2px;
+        border: 1px solid #d3dce6;
+        background: none;
+        color: #25265eab;
+        cursor: pointer;
+        padding: 6px;
+    }
+
+
+    .tablet-share {
+        width: 32px;
+    }
+
+    .upload-icon.svg {
+        width: 15px !important;
+        height: 15px !important;
+        display: block;
+    }
+
+    #fileInput {
+        display: none;
+    }
+
+    .upload-button:hover {
+        border-color: #ffffff;
+    }
+
+    .dark-mode .upload-button {
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Style cho top-bar */
+    .desktop-top-bar__btn-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        border-top: 1px solid #d3dce6;
+        border-bottom: 1px solid #d3dce6;
+        overflow: hidden;
+    }
+
+    .ace_content {
+        width: 100% !important;
+        height: 100%;
+    }
+
+    /*Modal popup*/
+    /* Overlay */
+    /* Overlay */
+    /* Overlay */
+    .custom-modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8); /* Darker overlay */
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Modal Content */
+    .custom-modal-content {
+        width: 80%;
+        max-width: 500px;
+        background-color: #1e1e2f; /* Dark background color */
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        color: #f0f0f5; /* Light text color for contrast */
+        overflow: hidden;
+    }
+
+    /* Header */
+    .custom-modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px;
+        background-color: #28293e; /* Slightly lighter for header contrast */
+        color: #ffffff; /* White text color */
+    }
+
+    .custom-modal-title {
+        font-size: 18px;
+        margin: 0;
+    }
+
+    /* Close Button */
+    .custom-close-btn {
+        background: none;
+        border: none;
+        color: #ffffff; /* White color for close button */
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+        /* Close button hover */
+        .custom-close-btn:hover {
+            color: #ff6b6b; /* Soft red color for better visibility */
+        }
+
+    /* Body */
+    .custom-modal-body {
+        padding: 16px;
+        color: #cfcfd5; /* Light gray for readability */
+    }
+
+    /* Input Label */
+    .title-label {
+        display: block;
+        margin-bottom: 8px;
+        color: #ffffff; /* White color for label */
+    }
+
+    /* Input Field */
+    .title-input {
+        width: 95%;
+        padding: 10px;
+        border: 1px solid #55576a; /* Neutral border */
+        border-radius: 4px;
+        background-color: #28293e; /* Dark background for the input */
+        color: #ffffff; /* White text color for input */
+    }
+
+        /* Input Field Focus Effect */
+        .title-input:focus {
+            border-color: #ffffff; /* Change border color to white on focus */
+            outline: none; /* Remove default outline */
+            background-color: #353843; /* Slightly lighter background on focus */
+        }
+
+    /* Footer */
+    .custom-modal-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+        padding: 16px;
+        background-color: #28293e; /* Same color as header */
+    }
+
+    /* Close Button in Footer */
+    .custom-modal-close-btn, .custom-modal-save-btn {
+        padding: 8px 16px;
+        font-size: 14px;
+        cursor: pointer;
+        color: #ffffff; /* White color for buttons */
+        border: none;
+        border-radius: 4px;
+    }
+
+    /* Save Button */
+    .custom-modal-save-btn {
+        background-color: #4a4a4a; /* Dark gray for primary action */
+        color: #ffffff; /* White text */
+    }
+
+        .custom-modal-save-btn:hover {
+            background-color: #666666; /* Lighter gray on hover */
+        }
+
+    /* Close Button in Footer */
+    .custom-modal-close-btn {
+        background-color: #55576a; /* Neutral dark gray */
+    }
+
+        .custom-modal-close-btn:hover {
+            background-color: #424456; /* Slightly darker on hover */
+        }
+
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const openModalBtn = document.getElementById("saveButton");
+    const closeModalBtn = document.getElementById("closeCustomModal");
+    const closeModalFooterBtn = document.getElementById("closeCustomModalFooter");
+    const customModal = document.getElementById("customModal");
+
+    // Function to open the modal
+    openModalBtn.addEventListener("click", function () {
+        customModal.style.display = "flex";
+    });
+
+    // Function to close the modal (close button and footer button)
+    closeModalBtn.addEventListener("click", function () {
+        customModal.style.display = "none";
+    });
+    closeModalFooterBtn.addEventListener("click", function () {
+        customModal.style.display = "none";
+    });
+
+    // Close the modal when clicking outside the content area
+    window.addEventListener("click", function (event) {
+        if (event.target === customModal) {
+            customModal.style.display = "none";
+        }
+    });
+});
+
+    
+</script>
