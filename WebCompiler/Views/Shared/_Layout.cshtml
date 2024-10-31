@@ -2,22 +2,47 @@
 <html>
 
 <head>
-    @await Component.InvokeAsync("Head")
+    <title>Online C# Compiler</title>
+    <link rel="shortcut icon" href="https://www.programiz.com/sites/tutorial2program/files/favicon.png" />
+    <mimeMap fileExtension=".woff" mimeType="application/font-woff" />
+    <link rel="stylesheet" type="text/css" href="/fonts/font.css">
+    <script src="/js/Programizcomnew.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+    <link rel="canonical" href="https://www.programiz.com/csharp-programming/online-compiler/" />
+    <meta name="description" content="Write and run your C# code using our online compiler. Enjoy additional features like code sharing, dark mode, and support for multiple programming languages." />
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.programiz.com/csharp-programming/online-compiler/" />
+    <meta property="og:title" content="Online C# Compiler" />
+    <meta property="og:description" content="Write and run your C# code using our online compiler. Enjoy additional features like code sharing, dark mode, and support for multiple programming languages." />
+    <meta property="og:image" content="https://programiz.com/online-compiler/assets/logos/compiler_logo.png" />
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://www.programiz.com/csharp-programming/online-compiler/" />
+    <meta name="twitter:title" content="Online C# Compiler">
+    <meta name="twitter:description" content="Write and run your C# code using our online compiler. Enjoy additional features like code sharing, dark mode, and support for multiple programming languages." />
+    <meta name="twitter:image" content="https://programiz.com/online-compiler/assets/logos/compiler_logo.png" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.11/ace.js"></script>
+    <script src="https://cmp.uniconsent.com/v2/stub.min.js"></script>
+    <script async src='https://cmp.uniconsent.com/v2/a8d3ae4937/cmp.js'></script>
+
+    <link rel="stylesheet" href="https://cdn.playground-v2.programiz.com/playground.css?v=1fsaf" />
+    <link rel="stylesheet" type="text/css" href="/css/site.css">
 </head>
 
 <body>
-    <!-- <select id="language-changer"></select> -->
     <div class="container">
         <div class="spinner">
             <div class="loader"><span>{</span><span>}</span></div>
         </div>
-        @await Component.InvokeAsync("Drawner")
-        <!-- Share code -->
-        <!-- Progress bar: share link generating modal -->
-        <div class="share-link-generating-modal" style="display: none;">
-            <div class="modal-backdrop-share">
-            </div>
 
+        <!-- Share code -->
+        <div class="share-link-generating-modal" style="display: none;">
+            <div class="modal-backdrop-share"></div>
             <div class="modal-content">
                 <div class="modal-header">
                     <h2 class="modal-title">Generating Link</h2>
@@ -30,15 +55,13 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
         <!-- Notification -->
-        <div class="notification " id="notification" style="display:none;">
+        <div class="notification" id="notification" style="display:none;">
             <div class="check-icon-wrapper">
                 <img src="https://cdn.playground-v2.programiz.com/assets/icons/check.svg" alt="check">
             </div>
-
             <div class="notification-message-wrapper">
                 <p class="notification-message"></p>
                 <button type="button" class="close-modal-notification" title="Close">
@@ -47,123 +70,33 @@
             </div>
         </div>
 
-        <!-- Share link modal -->
-        @await Component.InvokeAsync("ShareLink")
-
-        <!-- Share code end -->
-
         <div class="wrapper">
-            <div class="header">
-                <div class="header-wrapper">
-                    <div class="burger-menu">
-                        <button type="button" class="burger-menu-btn" title="Open navigation">
-                            <img class="svg burger-menu-btn-icon" src="https://cdn.playground-v2.programiz.com/assets/icons/burger.svg" />
-                        </button>
-                    </div>
-                    <div class="logo-wrapper">
-                        <h1 class="logo-title-wrapper">
-                            <a href="https://www.programiz.com/" target="_blank" class="logo-link">
-                                <img id="logo" src="https://cdn.playground-v2.programiz.com/assets/logos/logo.svg" />
-                                <span class="logo-sub-title-wrapper">
-                                    <span class="logo-sub-title">
-                                        Python                    Online Compiler
-                                    </span>
-                                </span>
-                            </a>
-                        </h1>
-                    </div>
-                </div>
-                <div class="compiler-header-ad">
-                    <div id="div-gpt-ad-Programizcom36786" class="content-top-ad">
-                    </div>
 
-                    <!-- buysell ads -->
-                    <div class="compiler-header-ad" id="carbon-block"></div>
+            <!-- Header -->
+            <partial name="_Header" />
 
-                </div>
-                <div id="add-replacement"></div>
-                
-                <div id="feedback-mobile">
-                    <a id="mobile-ad-link">&nbsp;Learn Python</a>
-                </div>
-            </div>
-            <div class="mobile-top-bar clearfix">
-                <div class="pills-wrapper">
-                    <div class="pills clearfix">
-                        <button class="pill active compiler-pill">
-                            main.py
-                        </button>
-                        <button class="pill shell-pill">
-                            Output
-                        </button>
-                    </div>
-                </div>
+            <!-- SideBar -->
+            <partial name="_SideBar" />\
 
-                <!-- Change the position of option wrapper which contain dark mode toggle and share in mob view -->
-                <div class="options-wrapper">
-                    <!-- <div id="back-button" class="options-item-wrapper clearfix">
-                      <img class="svg options-item" src="https://cdn.playground-v2.programiz.com/assets/icons/back-arrow.svg" />
-                    </div> -->
-                    <div id="toggle-dark-mode-mobile" class="options-item-wrapper clearfix">
-                        <img class="toggle-dark-mode-mobile-icon moon svg options-item" src="https://cdn.playground-v2.programiz.com/assets/icons/moon.svg" />
-                        <img class="toggle-dark-mode-mobile-icon sun svg options-item" src="https://cdn.playground-v2.programiz.com/assets/icons/sun.svg" />
-                    </div>
-                    <button class="share-button-mob" title="Share">
-                        <img class="svg share-icon" src="https://cdn.playground-v2.programiz.com/assets/icons/share.svg" />
-                    </button>
-                </div>
-                <button class="upload-button tablet-share" type="button">
-                <input type="file" id="fileInput" accept=".txt">
-                <label for="fileInput">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 50 50" class="upload-icon svg replaced-svg">
-                        <path d="M10.289 32.996a1 1 0 0 0-1 1v6.133a1 1 0 0 0 1 1h28a1 1 0 0 0 1-1v-6.133a1 1 0 1 0-2 0v5.133h-26v-5.133a1 1 0 0 0-1-1z"></path>
-                        <path d="M24.333 34.996a1 1 0 0 0 1-1v-21.51l6.343 6.127a.996.996 0 0 0 1.413-.024 1 1 0 0 0-.024-1.414l-8.023-7.751-.002-.002-.013-.012c-.036-.035-.081-.05-.12-.078-.064-.046-.123-.097-.196-.127a.997.997 0 0 0-.357-.072c-.007 0-.014-.004-.021-.004s-.014.004-.021.004a1.001 1.001 0 0 0-.357.072c-.073.03-.132.081-.196.126-.039.029-.084.044-.12.079l-.012.011-.002.002-8.023 7.751a1 1 0 0 0 1.389 1.438l6.343-6.127v21.51a.998.998 0 0 0 .999 1.001z"></path>
-                    </svg>
-                </label>
-            </button>
-                <div class="other-options-wrapper">
-                    <!-- <div id="feedback-mobile" class="options-item-wrapper">
-                      <a href="https://programiz.com/contact" class="options-item">
-                        <img class="svg" src="https://cdn.playground-v2.programiz.com/assets/icons/message-square.svg" />
-                      </a>
-                    </div> -->
+            <!-- Render-->
+            @RenderBody()
 
-                    <div class="mobile-top-bar-run-button run">
+            <!-- Terminal-->
+            <partial name="_Terminal" />
 
-                        <img src="https://cdn.playground-v2.programiz.com/assets/icons/play.svg" alt="run-icon" />
-                    </div>
-                </div>
-           
-            </div>
-                @await Component.InvokeAsync("SideBar")
-
-      
-                 @RenderBody()
-
-            <div class="terminal-wrapper">
-                <div class="terminal-desktop-top-bar">
-                    <div class="shell-name">
-                        Output
-                    </div>
-                    <div class="terminal-desktop-top-bar__btn-wrapper">
-                        <button class="desktop-clear-button">
-                            &nbsp;Clear&nbsp;
-                        </button>
-                    </div>
-                </div>
-                <div id="terminal"></div>
-            </div>
-      
-
-            
         </div>
-     
     </div>
-        
-        @await Component.InvokeAsync("Script")
 
     <script defer src="~/js/pythonCompilerHandler.js"></script>
+    <script defer src="~/js/shareCode.js"></script>
+    <script defer src="~/js/compileHistory.js"></script>
+    <script defer src="~/js/uploadFile.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+    <script defer src="https://cdn.playground-v2.programiz.com/build/final.js?v=resize-fixv3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
-
