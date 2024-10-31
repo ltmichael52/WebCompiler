@@ -1,7 +1,7 @@
 ﻿<div class="editor-wrapper" id="root" data-lang="@ViewBag.language">
     <div class="editor-desktop-top-bar">
         <div class="file-name">
-            main.py
+            Main.cs
         </div>
         <div class="desktop-top-bar__btn-wrapper">
             <!-- Fullscreen toggle button -->
@@ -45,9 +45,19 @@
         Run
     </button>
     <div id="editor">
-        # Online Python compiler (interpreter) to run Python online.
-        # Write Python 3 code in this online editor and run it.
-        print("Try programiz.pro")
+        using System;
+
+        namespace HelloWorld
+        {
+          class Program
+          {
+            static void Main(string[] args)
+            {
+              Console.WriteLine("Hello World!");    
+            }
+          }
+        }
+
     </div>
 </div>
 

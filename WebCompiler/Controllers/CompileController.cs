@@ -15,5 +15,15 @@ namespace WebCompiler.Controllers
             return View();
         }
 
+        /// <summary>
+        /// CSharp Compiler
+        /// </summary>
+        [HttpGet("csharp")]
+        public IActionResult CSharp()
+        {
+            ViewBag.language = "csharp";
+            return View();
+        }
+
     }
 }
