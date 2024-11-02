@@ -18,15 +18,15 @@
             font-size: 14px;
         }
 
-        .ace_hintcomplete .ace_completion {
-            padding: 5px;
-            border-bottom: 1px solid #49483e;
-        }
+            .ace_hintcomplete .ace_completion {
+                padding: 5px;
+                border-bottom: 1px solid #49483e;
+            }
 
-        .ace_hintcomplete .ace_completion.ace_selected {
-            background-color: #49483e;
-            color: #ffffff;
-        }
+                .ace_hintcomplete .ace_completion.ace_selected {
+                    background-color: #49483e;
+                    color: #ffffff;
+                }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ext-language_tools.js"></script>
@@ -118,29 +118,77 @@
         });
 
         // Sự kiện download file sau khi biên dịch
-        let uploadedFileName = '';
-        document.getElementById('downloadButton').addEventListener('click', async function () {
-            const code = editor.getValue();
-            const blob = new Blob([code], { type: 'text/plain' });
-            // Tạo một file handle
-            const options = {
-                suggestedName: uploadedFileName || 'Main.cs',
-                types: [{
-                    description: 'C# Files',
-                    accept: { 'text/plain': ['.cs'] },
-                }],
-            };
-            try {
-                const fileHandle = await window.showSaveFilePicker(options);
-                // Ghi dữ liệu vào file
-                const writable = await fileHandle.createWritable();
-                await writable.write(blob);
-                await writable.close();
-
-            } catch (error) {
-                console.error('Error saving file:', error);
+        // Lấy code từ editor
+        class CodeEditor 
+        {
+            constructor(editor) 
+            {
+                this.editor = editor;
             }
+
+            getCode() 
+            {
+                return this.editor.getValue();
+            }
+        }
+
+        // Xử lý lưu file
+        class FileSaver {
+            constructor(fileName)
+            {
+                this.fileName = fileName || 'Main.cs';
+            }
+
+            async save(content) 
+            {
+                const blob = new Blob([content], { type: 'text/plain' });
+                const options = {
+                    suggestedName: this.fileName,
+                    types:
+                    [
+                        {
+                            description: 'C# Files',
+                            accept: { 'text/plain': ['.cs'] },
+                        },
+                    ],
+                };
+
+                try 
+                {
+                    const fileHandle = await window.showSaveFilePicker(options);
+                    const writable = await fileHandle.createWritable();
+                    await writable.write(blob);
+                    await writable.close();
+                    console.log('File đã được lưu thành công');
+                } catch (error) 
+                {
+                    console.error('Lỗi khi lưu file:', error);
+                }
+            }
+        }
+
+        // Xử lý tải xuống
+        class DownloadManager
+        {
+            constructor(editor, fileName = '') 
+            {
+                this.editor = new CodeEditor(editor);
+                this.fileSaver = new FileSaver(fileName);
+            }
+
+            async downloadCode() 
+            {
+                const code = this.editor.getCode();
+                await this.fileSaver.save(code);
+            }
+        }
+
+        document.getElementById('downloadButton').addEventListener('click', async function ()
+        {
+            const downloadManager = new DownloadManager(editor, uploadedFileName);
+            await downloadManager.downloadCode();
         });
+
     </script>
 
     <!-- The use of the cloudflare cdn for all external libraries is intential. We are trying to reduce the number
@@ -154,7 +202,7 @@
     <!-- Google Tag Manager (noscript) -->
     <noscript>
         <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TKXT7MH" height="0" width="0"
-            style="display:none;visibility:hidden"></iframe>
+                style="display:none;visibility:hidden"></iframe>
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
 </body>
