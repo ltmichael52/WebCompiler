@@ -4,26 +4,26 @@
     box-sizing: border-box;
 }
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
 @media screen and (min-width: 800px) {
@@ -75,8 +75,8 @@ body {
     font-size: 14px;
     line-height: 20px;
     padding: 0;
-    color: #ffffffde; /* Text color */
-    margin-bottom: 10px; /* Add margin if needed */
+    color: #ffffffde; 
+    margin-bottom: 10px; 
 }
 
 .dark-mode .close-modal {
@@ -170,6 +170,11 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+.dark-mode .upload-icon.svg {
+    fill: #ffffff; /*SVG*/
+    color: #ffffff; /*text*/
+}
+
 /* Style cho top-bar */
 .desktop-top-bar__btn-wrapper {
     display: flex;
@@ -185,9 +190,9 @@ body {
     height: 100%;
 }
 
-
-/* Thiết lập cho upload button */
-.upload-button {
+/* Quan */
+/* Style cho download button */
+.download-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -196,7 +201,7 @@ body {
     font-size: 14px;
     line-height: 20px;
     margin-left: 16px;
-    width: 85px;
+    width: 32px; 
     height: 32px;
     border-radius: 2px;
     border: 1px solid #d3dce6;
@@ -206,26 +211,17 @@ body {
     padding: 6px;
 }
 
-
-.tablet-share {
-    width: 32px;
-}
-
-.upload-icon.svg {
+.download-icon.svg {
     width: 15px !important;
     height: 15px !important;
     display: block;
 }
 
-#fileInput {
-    display: none;
-}
-
-.upload-button:hover {
+.download-button:hover {
     border-color: #ffffff;
 }
 
-.dark-mode .upload-button {
+.dark-mode .download-button {
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 

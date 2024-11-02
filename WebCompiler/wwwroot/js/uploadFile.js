@@ -8,6 +8,7 @@ editor.session.setMode("ace/mode/python");
 document.getElementById('fileInput').addEventListener('change', function (event) {
     var file = event.target.files[0];
     if (file) {
+        uploadedFileName = file.name; // Lưu tên file
         var reader = new FileReader();
         reader.onload = function (e) {
             var content = e.target.result;
