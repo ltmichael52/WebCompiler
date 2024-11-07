@@ -10,7 +10,13 @@
         <div class="logo-wrapper">
             <h1 class="logo-title-wrapper">
                 <a href="https://localhost:7028/home/index" class="logo-link">
-                    <img id="logo" src="https://cdn.playground-v2.programiz.com/assets/logos/logo.svg" />
+                    <img id="logo" style="max-width: 100px; height: 50px; background: none;
+                       image-rendering: -moz-crisp-edges;
+                       image-rendering: -o-crisp-edges;
+                       image-rendering: -webkit-optimize-contrast;
+                       image-rendering: crisp-edges;
+                       image-rendering: pixelated;"
+                         src="@(Url.Content("~/assets/icons/logo.png"))" />
                     <span class="logo-sub-title-wrapper">
                         <span class="logo-sub-title">
                             Python                    Online Compiler
