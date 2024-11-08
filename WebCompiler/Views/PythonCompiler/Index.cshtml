@@ -1,0 +1,47 @@
+﻿@model WebCompiler.Models.PythonCompiler
+
+@{
+    ViewData["Title"] = "Web Compiler";
+}
+<!-- CodeMirror CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+<!-- CodeMirror JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+<!-- CodeMirror Python mode -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+
+<h1>Python Web Compiler</h1>
+
+<form asp-action="Compile" method="post">
+    <div>
+        <textarea id="code" name="Code" rows="10" cols="50" placeholder="Enter your Python code here...">
+# Test program
+# This program adds two numbers
+
+num1 = 1.5
+num2 = 6.3
+
+# Add two numbers
+sum = num1 + num2
+
+# Display the sum
+print('The sum of {0} and {1} is {2}'.format(num1, num2, sum))
+        </textarea>
+    </div>
+    <button type="submit">Compile</button>
+</form>
+
+@if (Model != null && !string.IsNullOrEmpty(Model.Output))
+{
+    <h3>Output:</h3>
+    <pre>@Model.Output</pre>
+}
+
+
+<script>
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        mode: "python",
+        lineNumbers: true,
+        theme: "default" // You can change the theme if desired
+    });
+</script>
