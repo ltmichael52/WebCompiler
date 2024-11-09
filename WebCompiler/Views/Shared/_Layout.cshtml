@@ -1,49 +1,155 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WebCompiler</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/WebCompiler.styles.css" asp-append-version="true" />
+    @await Component.InvokeAsync("Head")
 </head>
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebCompiler</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+
+    <div class="container" id="root" data-lang="csharp">
+        <div class="spinner">
+            <div class="loader"><span>{</span><span>}</span></div>
+        </div>
+        @await Component.InvokeAsync("Drawner")
+
+        <!-- Modal tạo liên kết chia sẻ -->
+        <div class="share-link-generating-modal" style="display: none;">
+            <div class="modal-backdrop-share"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Generating Link</h2>
+                    <h2 class="modal-title modal-title-mob">Generating Link</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+        </div>
+
+        <!-- Notification -->
+        <div class="notification" id="notification" style="display:none;">
+            <div class="check-icon-wrapper">
+                <img src="https://cdn.playground-v2.programiz.com/assets/icons/check.svg" alt="check">
+            </div>
+
+            <div class="notification-message-wrapper">
+                <p class="notification-message"></p>
+                <button type="button" class="close-modal-notification" title="Close">
+                    <img class="svg" src="https://cdn.playground-v2.programiz.com/assets/icons/close-v2-small.svg" />
+                </button>
+            </div>
+        </div>
+        @await Component.InvokeAsync("ShareLink")
+
+        <div class="wrapper">
+            <div class="header">
+                <div class="header-wrapper">
+                    <div class="burger-menu">
+                        <button type="button" class="burger-menu-btn" title="Open navigation">
+                            <img class="svg burger-menu-btn-icon" src="https://cdn.playground-v2.programiz.com/assets/icons/burger.svg" />
+                        </button>
+                    </div>
+                    <div class="logo-wrapper">
+                        <h1 class="logo-title-wrapper">
+                            <a href="https://www.programiz.com/" target="_blank" class="logo-link">
+                                <img id="logo" src="https://cdn.playground-v2.programiz.com/assets/logos/logo.svg" />
+                                <span class="logo-sub-title-wrapper">
+                                    <span class="logo-sub-title">
+                                        C# Online Compiler
+                                    </span>
+                                </span>
+                            </a>
+                        </h1>
+                    </div>
+                </div>
+                <div class="compiler-header-ad">
+                    <div id="div-gpt-ad-Programizcom36786" class="content-top-ad"></div>
+                    <div class="compiler-header-ad" id="carbon-block"></div>
+                </div>
+            </div>
+
+            <div class="mobile-top-bar clearfix">
+                <div class="pills-wrapper">
+                    <div class="pills clearfix">
+                        <button class="pill active compiler-pill">
+                            Main.cs
+                        </button>
+                        <button class="pill shell-pill">
+                            Output
+                        </button>
+                    </div>
+                </div>
+
+                <div class="options-wrapper">
+                    <div id="toggle-dark-mode-mobile" class="options-item-wrapper clearfix">
+                        <img class="toggle-dark-mode-mobile-icon moon svg options-item" src="https://cdn.playground-v2.programiz.com/assets/icons/moon.svg" />
+                        <img class="toggle-dark-mode-mobile-icon sun svg options-item" src="https://cdn.playground-v2.programiz.com/assets/icons/sun.svg" />
+                    </div>
+                    <button class="share-button-mob" title="Share">
+                        <img class="svg share-icon" src="https://cdn.playground-v2.programiz.com/assets/icons/share.svg" />
+                    </button>
+                </div>
+
+                <button class="upload-button tablet-share" type="button">
+                    <input type="file" id="fileInput" accept=".txt">
+                    <label for="fileInput">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 50 50" class="upload-icon svg replaced-svg">
+                            <path d="M10.289 32.996a1 1 0 0 0-1 1v6.133a1 1 0 0 0 1 1h28a1 1 0 0 0 1-1v-6.133a1 1 0 1 0-2 0v5.133h-26v-5.133a1 1 0 0 0-1-1z"></path>
+                            <path d="M24.333 34.996a1 1 0 0 0 1-1v-21.51l6.343 6.127a.996.996 0 0 0 1.413-.024 1 1 0 0 0-.024-1.414l-8.023-7.751-.002-.002-.013-.012c-.036-.035-.081-.05-.12-.078-.064-.046-.123-.097-.196-.127a.997.997 0 0 0-.357-.072c-.007 0-.014-.004-.021-.004s-.014.004-.021.004a1.001 1.001 0 0 0-.357.072c-.073.03-.132.081-.196.126-.039.029-.084.044-.12.079l-.012.011-.002.002-8.023 7.751a1 1 0 0 0 1.389 1.438l6.343-6.127v21.51a.998.998 0 0 0 .999 1.001z"></path>
+                        </svg>
+                    </label>
+                </button>
+
+                <button class="download-button tablet-share" type="button" id="downloadButton">
+                    <label for="downloadButton">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 50 50" class="download-icon svg replaced-svg">
+                            <path d="M10.289 32.996a1 1 0 0 0-1 1v6.133a1 1 0 0 0 1 1h28a1 1 0 0 0 1-1v-6.133a1 1 0 1 0-2 0v5.133h-26v-5.133a1 1 0 0 0-1-1z"></path>
+                            <path d="M24.333 34.996a1 1 0 0 0 1-1v-21.51l6.343 6.127a.996.996 0 0 0 1.413-.024 1 1 0 0 0-.024-1.414l-8.023-7.751-.002-.002-.013-.012c-.036-.035-.081-.05-.12-.078-.064-.046-.123-.097-.196-.127a.997.997 0 0 0-.357-.072c-.007 0-.014-.004-.021-.004s-.014.004-.021.004a1.001 1.001 0 0 0-.357.072c-.073.03-.132.081-.196.126-.039.029-.084.044-.12.079l-.012.011-.002.002-8.023 7.751a1 1 0 0 0 1.389 1.438l6.343-6.127v21.51a.998.998 0 0 0 .999 1.001z"></path>
+                            <path d="M24.333 20a1 1 0 0 0-1 1v21.51l-6.343-6.127a.996.996 0 0 0-1.413.024 1 1 0 0 0 .024 1.414l8.023 7.751.002.002.013.012c.036.035.081.05.12.078.064.046.123.097.196.127a.997.997 0 0 0 .357.072c.007 0 .014.004.021.004s.014-.004.021-.004a1.001 1.001 0 0 0 .357-.072c.073-.03.132-.081.196-.126.039-.029.084-.044.12-.079l.012-.011.002-.002 8.023-7.751a1 1 0 0 0-1.389-1.438l-6.343 6.127V21a1 1 0 0 0-1-1z"></path>
+                        </svg>
+                    </label>
+                </button>
+
+                <div class="other-options-wrapper">
+                    <!-- <div id="feedback-mobile" class="options-item-wrapper">
+                      <a href="https://programiz.com/contact" class="options-item">
+                        <img class="svg" src="https://cdn.playground-v2.programiz.com/assets/icons/message-square.svg" />
+                      </a>
+                    </div> -->
+
+                    <div class="mobile-top-bar-run-button run">
+
+                        <img src="https://cdn.playground-v2.programiz.com/assets/icons/play.svg" alt="run-icon" />
+                    </div>
+                </div>
+            </div>
+
+            @await Component.InvokeAsync("SideBar")
+
+            @await Component.InvokeAsync("TopBar")
             @RenderBody()
-        </main>
+
+            <div class="terminal-wrapper">
+                <div class="terminal-desktop-top-bar">
+                    <div class="shell-name">
+                        Output
+                    </div>
+                    <div class="terminal-desktop-top-bar__btn-wrapper">
+                        <button class="desktop-clear-button">
+                            &nbsp;Clear&nbsp;
+                        </button>
+                    </div>
+                </div>
+                <div id="terminal"></div>
+            </div>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - WebCompiler - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    @await Component.InvokeAsync("Script")
+
 </body>
+
 </html>

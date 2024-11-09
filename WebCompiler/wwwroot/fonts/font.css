@@ -1,0 +1,48 @@
+﻿@font-face {
+    font-family: 'Euclid Circular A';
+    src: url('/fonts/70953e7639a3794d.p.woff') format("woff");
+    font-display: swap;
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'Euclid Circular A';
+    src: url('/fonts/8737e72a2bf0497e.p.woff') format("wof");
+    font-display: swap;
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'Euclid Circular A';
+    src: url('/fonts/5b7c83c780deee22.p.woff') format("woff");
+    font-display: swap;
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'Euclid Circular A';
+    src: url('/fonts/c6956455bfeda5c5.p.woff') format("woff");
+    font-display: swap;
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'Euclid Circular A';
+    src: url('/fonts/c706017e99c37e0c.p.woff') format("woff");
+    font-display: swap;
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'Euclid Circular A';
+    src: url('/fonts/0edda3c7acc1c69f.p.woff') format("woff");
+    font-display: swap;
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'Droid Sans Mono';
+    src: url('/fonts/droid-sans-mono.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+body {
+    font-family: 'Droid Sans Mono', monospace;
+}
