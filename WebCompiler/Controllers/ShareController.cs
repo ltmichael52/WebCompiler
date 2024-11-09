@@ -46,36 +46,35 @@ namespace WebCompiler.Controllers
 
             dynamic data = JsonConvert.DeserializeObject(jsonData);
             string content = data?.content;
-
+            string language = data?.lang;
+            
             if (content == null)
             {
                 return BadRequest("Invalid JSON format");
             }
 
             string key = Guid.NewGuid().ToString();
-            _redisService.SaveCode(key, content);
+            _redisService.SaveCode(key, content, language);
 
             string shareUrl = Url.Action("ViewCode", "Share", new { key }, Request.Scheme);
             return Json(new { shareUrl });
         }
 
+
         public IActionResult ViewCode(string key)
         {
             var code = _redisService.GetCode(key);
+            var language = _redisService.GetLanguage(key);
+
             if (code == null)
             {
                 return NotFound();
             }
-            ViewBag.Code = code;
-            return View();
-        }
 
-        [HttpGet]
-        public ActionResult GetCode(string key)
-        {
-            // Fetch code content from Redis based on the provided key
-            string content = _redisService.GetCode(key);
-            return Json(new { content });
+            ViewBag.Code = code;
+            ViewBag.language = language;
+
+            return View();
         }
         
     }
