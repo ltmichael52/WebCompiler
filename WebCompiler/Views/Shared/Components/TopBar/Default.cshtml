@@ -38,7 +38,7 @@
             </button>
 
             <!-- Share button -->
-            <button class="share-button" title="Share">
+            <button class="share-buttoncode" title="Share">
                 <img class="toggle-expanded-mode-mobile-icon svg share-icon" src="https://cdn.playground-v2.programiz.com/assets/icons/share.svg" />
                 Share
             </button>
@@ -180,5 +180,30 @@
         height: 100%;
     }
 
-</style>
+    .dark-mode .share-buttoncode {
+        border: 1px solid #ffffff33;
+        background: none;
+        color: #ffffff;
+    }
 
+
+    .share-buttoncode {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        align-items: center;
+        margin-left: 16px;
+        width: 85px;
+        height: 32px;
+        border-radius: 2px;
+        border: 1px solid #d3dce6;
+        background: none;
+        color: #25265eab;
+        cursor: pointer;
+        padding: 6px;
+    }
+</style>

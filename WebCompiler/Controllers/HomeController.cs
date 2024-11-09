@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WebCompiler.Models;
 
@@ -13,16 +13,19 @@ namespace WebCompiler.Controllers
             _logger = logger;
         }
 
+        // Trang chủ
         public IActionResult Index()
         {
             return View();
         }
 
+        // Trang Privacy (có thể không cần)
         public IActionResult Privacy()
         {
             return View();
         }
 
+        // Xử lý lỗi
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

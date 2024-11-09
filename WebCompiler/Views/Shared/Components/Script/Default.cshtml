@@ -1,22 +1,22 @@
 ﻿<script defer type="text/javascript">
-    const lang = "c#";
+    const lang = "python";
 
     var playStoreUrl =
-        "https://play.google.com/store/apps/details?id=com.programiz.learncsharp"
-    appStoreUrl =
-        "https://apps.apple.com/app/apple-store/id1472188189?pt=120228772",
+        "https://play.google.com/store/apps/details?id=com.programiz.learnpython",
+        appStoreUrl =
+            "https://apps.apple.com/app/apple-store/id1472188189?pt=120228772",
         desktopUrl = "https://www.programiz.com/learn-python";
 
     const desktopAdsButton = document.getElementById("ad-link");
     const mobileAdsButton = document.getElementById("mobile-ad-link");
 
-    const challengeLinkProbability = 0 / 100; 
+    const challengeLinkProbability = 0 / 100; // in percentage
     const hasChallengeLinkAsAds = Math.random() <= challengeLinkProbability;
 
     if (hasChallengeLinkAsAds) {
         const baseURL = "https://app.programiz.pro/community-challenges/home"
-        desktopAdsButton.innerHTML = `C# Challenges ❯`;
-        mobileAdsButton.innerHTML = `C# Challenges`;
+        desktopAdsButton.innerHTML = `Python Challenges ❯`;
+        mobileAdsButton.innerHTML = `Python Challenges`;
         desktopAdsButton.href = baseURL;
         mobileAdsButton.href = baseURL;
     } else {
@@ -36,16 +36,12 @@
     // Khởi tạo Ace Editor
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
-    editor.session.setMode("ace/mode/csharp");
-
-    document.querySelector('.compiler-pill').innerText = 'Main.cs';
-
+    editor.session.setMode("ace/mode/python");
 
     // Thêm sự kiện khi người dùng upload file
     document.getElementById('fileInput').addEventListener('change', function (event) {
         var file = event.target.files[0];
         if (file) {
-            uploadedFileName = file.name; // Lưu tên file
             var reader = new FileReader();
             reader.onload = function (e) {
                 var content = e.target.result;
@@ -57,30 +53,51 @@
             alert('No file selected');
         }
     });
+</script>
 
-    // Sự kiện download file sau khi biên dịch
-    let uploadedFileName = '';
-    document.getElementById('downloadButton').addEventListener('click', async function () {
-        const code = editor.getValue();
-        const blob = new Blob([code], { type: 'text/plain' });
-        // Tạo một file handle
-        const options = {
-            suggestedName: uploadedFileName || 'Main.cs',
-            types: [{
-                description: 'C# Files',
-                accept: { 'text/plain': ['.cs'] },
-            }],
-        };
-        try {
-            const fileHandle = await window.showSaveFilePicker(options);
-            // Ghi dữ liệu vào file
-            const writable = await fileHandle.createWritable();
-            await writable.write(blob);
-            await writable.close();
-
-        } catch (error) {
-            console.error('Error saving file:', error);
-        }
+<script>
+    document.querySelector('.share-buttoncode').addEventListener('click', function () {
+        // Get all HTML code of the page
+        // Select all code lines from elements within the editor
+        const editorLines = document.querySelectorAll('#editor .ace_line');
+        // Extract and clean text content line by line
+        const codeContent = Array.from(editorLines)
+            .map(line => line.textContent.trim())  // Get text content of each line, trimmed
+            .filter(line => line)                  // Remove any empty lines
+            .join('\n');                           // Join with newline for readable formatting
+        console.log(codeContent);
+        fetch('/Share/SaveCode', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ content: codeContent })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Code could not be saved to the server.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const shareUrl = data.shareUrl;
+                // JavaScript to update and display modal
+                document.querySelector('.modal-header h2').textContent = 'Share your code';
+                document.querySelector('.modal-body').innerHTML = `
+                    <div class="share-code-container">
+                        <input type="text" value="${shareUrl}" readonly class="share-code-value" />
+                    </div>
+                    <button class="share-code-copy-btn" title="Copy Link" style="display: inline-block;" onclick="navigator.clipboard.writeText('${shareUrl}')">Copy Link</button>
+                `;
+                // Show modal
+                document.querySelector('.share-link-generating-modal').style.display = 'block';
+                // Function to close modal
+                function closeModal() {
+                    document.querySelector('.share-link-generating-modal').style.display = 'none';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while sharing the code.');
+            });
     });
 </script>
 
