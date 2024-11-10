@@ -30,13 +30,13 @@ body {
 }
 
 @media screen and (min-width: 800px) {
-    .share-buttoncode {
+    .share-button-code {
         display: none;
     }
 }
 
 @media screen and (min-width: 1200px) {
-    .share-buttoncode {
+    .share-button-code {
         display: flex;
     }
 }
@@ -78,49 +78,6 @@ body {
     color: #ffffff; /* Change the "X" text color to white for dark theme */
 }
 
-/* Setup for the upload button */
-.upload-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 20px;
-    margin-left: 16px;
-    width: 85px;
-    height: 32px;
-    border-radius: 2px;
-    border: 1px solid #d3dce6;
-    background: none;
-    color: #25265eab;
-    cursor: pointer;
-    padding: 6px;
-}
-
-
-.tablet-share {
-    width: 32px;
-}
-
-.upload-icon.svg {
-    width: 15px !important;
-    height: 15px !important;
-    display: block;
-}
-
-#fileInput {
-    display: none;
-}
-
-.upload-button:hover {
-    border-color: #ffffff;
-}
-
-.dark-mode .upload-button {
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
 /* Style cho top-bar */
 .desktop-top-bar__btn-wrapper {
     display: flex;
@@ -136,16 +93,16 @@ body {
     height: 100%;
 }
 
-.dark-mode .share-buttoncode {
+.dark-mode .share-button-code {
     border: 1px solid #ffffff33;
     background: none;
     color: #ffffff;
 }
 
 
-.share-buttoncode {
+.share-button-code {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     gap: 8px;
     font-weight: 500;
@@ -222,7 +179,6 @@ body {
     width: 100% !important;
     height: 100%;
 }
-
 
 /* Thiết lập cho upload button */
 .upload-button {
@@ -432,3 +388,4 @@ body {
         transform: scale(1.05);
     }
 }
+

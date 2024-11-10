@@ -1,8 +1,7 @@
-﻿using System;
-using StackExchange.Redis;
-using WebCompiler.Interfaces;
+﻿using StackExchange.Redis;
+using WebCompiler.Service.Interfaces;
 
-public class RedisService : ICacheService
+public class RedisService : IRedisService
 {
     private readonly string _host;
     private readonly int _port;
@@ -39,7 +38,7 @@ public class RedisService : ICacheService
         return _connectionMultiplexer?.IsConnected ?? false;
     }
 
-    public void SaveCode(string key, string code)
+    public void SaveCode(string key, string code, string language)
     {
         if (!IsConnected())
         {
@@ -51,6 +50,7 @@ public class RedisService : ICacheService
         {
             var db = _connectionMultiplexer.GetDatabase();
             db.StringSet(key, code);
+            db.StringSet(key + ":lang", language);
         }
         catch (RedisException ex)
         {
@@ -77,4 +77,25 @@ public class RedisService : ICacheService
             return null;
         }
     }
+
+    public string GetLanguage(string key)
+    {
+        if (!IsConnected())
+        {
+            Console.WriteLine("Not connected to Redis.");
+            return null;
+        }
+
+        try
+        {
+            var db = _connectionMultiplexer.GetDatabase();
+            return db.StringGet(key + ":lang");
+        }
+        catch (RedisException ex)
+        {
+            Console.WriteLine($"Failed to get language from Redis: {ex.Message}");
+            return null;
+        }
+    }
+
 }
