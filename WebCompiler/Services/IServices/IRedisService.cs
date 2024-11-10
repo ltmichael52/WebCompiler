@@ -1,6 +1,6 @@
-﻿namespace WebCompiler.Interfaces
+﻿namespace WebCompiler.Service.Interfaces
 {
-    public interface ICacheService
+    public interface IRedisService
     {
         void SaveCode(string key, string code, string language);
         string GetCode(string key);

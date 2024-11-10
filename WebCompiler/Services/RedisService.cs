@@ -1,8 +1,7 @@
-﻿using System;
-using StackExchange.Redis;
-using WebCompiler.Interfaces;
+﻿using StackExchange.Redis;
+using WebCompiler.Service.Interfaces;
 
-public class RedisService : ICacheService
+public class RedisService : IRedisService
 {
     private readonly string _host;
     private readonly int _port;
