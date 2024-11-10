@@ -1,5 +1,38 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    Layout = "_Layout";
+    ViewData["HideTerminal"] = true;
+    ViewData["HideSidebar"] = true;
 }
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <link rel="stylesheet" href="~/css/site.css?v=1.0" />
+</head>
+<body>
+    <div class="welcome-container">
+        <!-- Logo Section -->
+        <img src="~/assets/icons/logo.png" alt="Logo" class="logo">
+
+        <!-- Text Section -->
+        <h2>Welcome to Online Compiler</h2>
+        <p>Please select a programming language below to get started.</p>
+
+        <!-- Button Section -->
+        <div class="button-container">
+            <a href="https://localhost:7028/csharp" class="language-button">
+                <span>C#</span>
+                <span class="icon">
+                    <img src="~/assets/icons/Csharp.png" alt="C# Icon">
+                </span>
+            </a>
+            <a href="https://localhost:7028/python" class="language-button">
+                <span>Python</span>
+                <span class="icon">
+                    <img src="~/assets/icons/Python.png" alt="Python Icon">
+                </span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

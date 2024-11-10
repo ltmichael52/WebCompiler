@@ -12,14 +12,12 @@
     <link rel="canonical" href="https://www.programiz.com/csharp-programming/online-compiler/" />
     <meta name="description" content="Write and run your C# code using our online compiler. Enjoy additional features like code sharing, dark mode, and support for multiple programming languages." />
 
-    <!-- Facebook Meta Tags -->
+    <!-- Meta Tags for Social Media -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.programiz.com/csharp-programming/online-compiler/" />
     <meta property="og:title" content="Online C# Compiler" />
     <meta property="og:description" content="Write and run your C# code using our online compiler. Enjoy additional features like code sharing, dark mode, and support for multiple programming languages." />
     <meta property="og:image" content="https://programiz.com/online-compiler/assets/logos/compiler_logo.png" />
-
-    <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary">
     <meta property="twitter:url" content="https://www.programiz.com/csharp-programming/online-compiler/" />
     <meta name="twitter:title" content="Online C# Compiler">
@@ -29,9 +27,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.11/ace.js"></script>
     <script src="https://cmp.uniconsent.com/v2/stub.min.js"></script>
     <script async src='https://cmp.uniconsent.com/v2/a8d3ae4937/cmp.js'></script>
-
     <link rel="stylesheet" href="https://cdn.playground-v2.programiz.com/playground.css?v=1fsaf" />
     <link rel="stylesheet" type="text/css" href="/css/site.css">
+
 </head>
 
 <body>
@@ -40,57 +38,51 @@
             <div class="loader"><span>{</span><span>}</span></div>
         </div>
 
-        <!-- Share code -->
-        <div class="share-link-generating-modal" style="display: none;">
-            <div class="modal-backdrop-share"></div>
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title">Generating Link</h2>
-                    <h2 class="modal-title modal-title-mob">Generating Link</h2>
-                    <button type="button" class="close-modal" title="Close" onclick="closeModal()">X</button>
-                </div>
-                <div class="modal-body">
-                    <div class="progress-bar">
-                        <div class="progress"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Notification -->
-        <div class="notification" id="notification" style="display:none;">
-            <div class="check-icon-wrapper">
-                <img src="https://cdn.playground-v2.programiz.com/assets/icons/check.svg" alt="check">
-            </div>
-            <div class="notification-message-wrapper">
-                <p class="notification-message"></p>
-                <button type="button" class="close-modal-notification" title="Close">
-                    <img class="svg" src="https://cdn.playground-v2.programiz.com/assets/icons/close-v2-small.svg" />
-                </button>
-            </div>
-        </div>
-
         <div class="wrapper">
-
             <!-- Header -->
             <partial name="_Header" />
 
             <!-- SideBar -->
-            <partial name="_SideBar" />
+            @{
+                var hideSidebar = ViewData["HideSidebar"] as bool? ?? false;
+            }
 
-            <!-- Render-->
+            @if (!hideSidebar)
+            {
+                <partial name="_SideBar" />
+            }
+
+            <!-- Render Body -->
             @RenderBody()
 
-            <!-- Terminal-->
-            <partial name="_Terminal" />
+            <!-- Terminal -->
+            @{
+                var hideTerminal = ViewData["HideTerminal"] as bool? ?? false;
+            }
+
+            @if (!hideTerminal)
+            {
+                <partial name="_Terminal" />
+            }
 
         </div>
     </div>
-
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector('.spinner').style.display = 'none'; 
+            document.querySelector('.wrapper').style.display = 'block'; 
+        });
+    </script>
+    <!-- Other JavaScript files -->
     <script defer src="~/js/pythonCompilerHandler.js"></script>
     <script defer src="~/js/shareCode.js"></script>
     <script defer src="~/js/compileHistory.js"></script>
     <script defer src="~/js/uploadFile.js"></script>
+    <script defer src="~/js/changeSideBar.js"></script>
+    <script defer src="~/js/hideSpinner.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.11/ace.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.11/ext-language_tools.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
@@ -98,5 +90,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </body>
-
 </html>

@@ -9,11 +9,11 @@
         </div>
         <div class="logo-wrapper">
             <h1 class="logo-title-wrapper">
-                <a href="https://localhost:7028/home/index" class="logo-link">
+                <a href="https://localhost:7028/"  class="logo-link">
                     <img id="logo" src="https://cdn.playground-v2.programiz.com/assets/logos/logo.svg" />
                     <span class="logo-sub-title-wrapper">
-                        <span class="logo-sub-title">
-                            Python                    Online Compiler
+                        <span class="logo-sub-title" id="compiler-title">
+                            Online Compiler
                         </span>
                     </span>
                 </a>
@@ -35,5 +35,20 @@
     </div>
 </div>
 
-<!--Header Start-->
+<!--Header End-->
 
+<script>
+    // Title
+    document.addEventListener("DOMContentLoaded", function () {
+        const titleElement = document.getElementById("compiler-title");
+        const path = window.location.pathname;
+
+        if (path === "/csharp") {
+            titleElement.textContent = "CSharp Online Compiler";
+        } else if (path === "/python") {
+            titleElement.textContent = "Python Online Compiler";
+        } else {
+            titleElement.textContent = "Online Compiler";
+        }
+    });
+</script>
