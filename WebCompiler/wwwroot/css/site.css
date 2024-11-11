@@ -1,4 +1,9 @@
-﻿html {
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
   font-size: 14px;
 }
 
@@ -489,5 +494,18 @@ body {
         font-size: 0.7em;
         padding: 6px 10px;
         width: 75px;
+    }
+}
+
+/* Logo styling */
+#logo {
+    width: 45px;
+    height: 35px;
+}
+
+@media screen and (min-width: 800px) {
+    #logo {
+        width: 70.8px;
+        height: 50.6px;
     }
 }
