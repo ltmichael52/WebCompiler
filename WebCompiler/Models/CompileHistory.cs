@@ -11,7 +11,7 @@ public partial class CompileHistory
 
     public string? Content { get; set; }
 
-    public int CodeLanguage { get; set; }
+    public string CodeLanguage { get; set; } = null!;
 
     public string Title { get; set; } = null!;
 

@@ -19,6 +19,8 @@ public partial class WebCompilerContext : DbContext
 
     public virtual DbSet<CompileHistory> CompileHistories { get; set; }
 
+    public virtual DbSet<EfmigrationHistory> EfmigrationHistories { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Data Source=66.42.43.15,1433;Initial Catalog=WebCompiler;User ID=sa;Password=Abc@12345;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
@@ -44,6 +46,7 @@ public partial class WebCompilerContext : DbContext
 
             entity.ToTable("CompileHistory");
 
+            entity.Property(e => e.CodeLanguage).HasMaxLength(50);
             entity.Property(e => e.CompileDate).HasColumnType("datetime");
             entity.Property(e => e.Title).HasMaxLength(255);
 
@@ -51,6 +54,16 @@ public partial class WebCompilerContext : DbContext
                 .HasForeignKey(d => d.AccountId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CompileHistory_Account");
+        });
+
+        modelBuilder.Entity<EfmigrationHistory>(entity =>
+        {
+            entity.HasKey(e => e.MigrationId);
+
+            entity.ToTable("EFMigrationHistory");
+
+            entity.Property(e => e.MigrationId).HasMaxLength(150);
+            entity.Property(e => e.ProductVersion).HasMaxLength(32);
         });
 
         OnModelCreatingPartial(modelBuilder);
