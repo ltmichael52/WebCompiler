@@ -8,6 +8,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 
+// Add HttpClient
+builder.Services.AddHttpClient();
+
 // Redis Service 
 builder.Services.AddScoped(sp => new RedisService("redis-13076.c292.ap-southeast-1-1.ec2.redns.redis-cloud.com", 13076, "Mcre4XSFEzmb4C0SRoGDSQTx25kUTonC"));
 
