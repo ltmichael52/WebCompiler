@@ -42,8 +42,8 @@ namespace WebCompiler.Services
         public IActionResult showOldCompile(int compileId)
         {
             CompileHistory cpHistory = db.CompileHistories.FirstOrDefault(c=>c.Id == compileId);
-            int language = cpHistory.CodeLanguage;
-            HttpContext.Session.SetInt32("language", language);
+            //int language = cpHistory.CodeLanguage;
+            //HttpContext.Session.SetInt32("language", language);
 
 
             return PartialView("~/Views/Shared/PartialView/PartialEditor.cshtml", cpHistory);
