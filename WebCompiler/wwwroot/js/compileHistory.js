@@ -1,42 +1,47 @@
 ﻿
 //Ajax to save compile history
 // Click event listener for the Save button
-document.querySelector('.custom-modal-save-btn').addEventListener('click', function () {
-    const title = document.getElementById('titleInput').value;
+var isloading = false;
+$(document).off('click', '.custom-modal-save-btn').on('click', '.custom-modal-save-btn', function (event) {
+    if (!isloading) {
+        event.preventDefault(); // Prevent default form submission
 
-    // Collect code from all elements with the class `ace_line`
-    const aceLines = document.querySelectorAll('#editor .ace_line');
-    let content = '';
+        isloading = true;
+        let countTime = 0;
+        console.log("Click time :" + countTime);
+        countTime += 1;
 
-    // Iterate through each line and append its inner text
-    aceLines.forEach(line => {
-        content += line.innerText + '\n'; // Add a newline after each line
-    });
+        const title = document.getElementById('titleInput').value;
 
-    console.log("Title:", title);
-    console.log("Content:", content);
+        // Collect code from all elements with the class `ace_line`
+        const aceLines = document.querySelectorAll('#editor .ace_line');
+        let content = '';
 
-    // Perform AJAX request to save the content
-    $.ajax({
-        url: '/CompileHistory/SaveCompileHistory', // Adjust with your actual URL if needed
-        type: 'POST',
-        data: {
-            title: title,
-            content: content
-        },
-        success: function (response) {
-            // Hide the modal
-            $('#customModal').hide();
+        aceLines.forEach(line => {
+            content += line.innerText + '\n';
+        });
 
-            // Optionally update a section with the new content
-            $('#compileHistorySection').html(response);
+        console.log("Title:", title);
+        console.log("Content:", content);
 
-        },
-        error: function (xhr, status, error) {
-            console.error("Error saving compile history:", error);
-            alert("Failed to save compile history.");
-        }
-    });
+        // Perform AJAX request to save the content
+        $.ajax({
+            url: '/CompileHistory/SaveCompileHistory',
+            type: 'POST',
+            data: { title, content },
+            success: function (response) {
+                $('#customModal').hide();
+                $('#titleInput').val('');
+                $('#compileHistorySection').html(response);
+                isloading = false;
+            },
+            error: function (xhr, status, error) {
+                console.error("Error saving compile history:", error);
+                alert("Failed to save compile history.");
+                isloading = false;
+            }
+        });
+    }
 });
 
 
