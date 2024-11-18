@@ -24,7 +24,7 @@ namespace WebCompiler.ViewComponents
 
             if (accountId == 0)
             {
-                return View("SideBarDefault");
+                return View("_SideBar");
             }
             else
             {

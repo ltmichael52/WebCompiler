@@ -1,5 +1,2 @@
-﻿@model CompileHistory
-
-@Html.Raw(Model?.Content == null || Model.Content == ""
-                ? "# Online Python compiler (interpreter) to run Python online.\n# Write Python 3 code in this online editor and run it.\nprint(\"Try programiz.pro\")"
-                : Model.Content)
+﻿@model CompileHistory 
+@Model.Content

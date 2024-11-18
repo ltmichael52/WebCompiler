@@ -7,6 +7,13 @@
     <link rel="stylesheet" type="text/css" href="/fonts/font.css">
     <link rel="stylesheet" href="https://cdn.playground-v2.programiz.com/playground.css?v=1fsaf" />
     <link rel="stylesheet" type="text/css" href="/css/site.css" asp-append-version="true">
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.11/ace.js"></script>
+     <script src="https://cmp.uniconsent.com/v2/stub.min.js"></script>
+     <script async src='https://cmp.uniconsent.com/v2/a8d3ae4937/cmp.js'></script>
+     <link rel="stylesheet" href="https://cdn.playground-v2.programiz.com/playground.css?v=1fsaf" />
+     <link rel="stylesheet" type="text/css" href="/css/site.css">
+     <link rel="stylesheet" type="text/css" href="~/assets/modalPopup/index.css">
+     <link rel="stylesheet" type="text/css" href="~/assets/sideBar/index.css">
     <style>
         /* Chat box styling */
         .chat-box {
@@ -64,6 +71,7 @@
                 border-radius: 0 0 10px 0;
             }
 
+   
                 .chat-input button:hover {
                     background-color: #0056b3;
                 }
@@ -102,7 +110,7 @@
 
             @if (!hideSidebar)
             {
-                <partial name="_SideBar" />
+                @await Component.InvokeAsync("SideBar")
             }
 
             <!-- Render Body -->
@@ -190,7 +198,10 @@
     <script defer src="~/js/uploadFile.js"></script>
     <script defer src="~/js/changeSideBar.js"></script>
     <script defer src="~/js/hideSpinner.js"></script>
+    <script defer src="~/assets/modalPopup/index.js"></script>
+    <script defer src="~/assets/sideBar/index.js"></script>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.11/ace.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.11/ext-language_tools.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>

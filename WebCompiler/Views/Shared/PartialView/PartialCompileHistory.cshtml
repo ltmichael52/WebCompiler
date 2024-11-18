@@ -11,26 +11,4 @@
     </div>
 }
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).on('click', '.history-category', function () {
-        console.log("Hi");
-        var id = $(this).data('id');
-        console.log(id);
-
-        $.ajax({
-            url: '/CompileHistory/showOldCompile',
-            type: 'GET',
-            data: {
-                compileId: id,
-            },
-            success: function (response) {
-                $('#editor').html(response);
-                console.log("done");
-            },
-            error: function (xhr, status, error) {
-                console.error("Error:", error);
-            }
-        });
-    });
-</script>
+<script defer src="~/js/compileHistory.js"></script>
