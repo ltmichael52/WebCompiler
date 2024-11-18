@@ -1,4 +1,6 @@
-﻿<div class="editor-wrapper" id="root" data-lang="@ViewBag.language">
+﻿@model CompileHistory
+
+<div class="editor-wrapper" id="root" data-lang="@ViewBag.language">
     <div class="editor-desktop-top-bar">
         <div class="file-name">
             Main.cs
@@ -11,29 +13,7 @@
             </button>
 
             <!-- Button trigger modal -->
-            <button type="button" id="saveButton" class="upload-button tablet-share">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" class="save-icon">
-                    <path d="M17 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2zm0 16H7V5h10v14zM8 7h8v2H8V7zm2 6h4v2h-4v-2z" />
-                </svg>
-            </button>
-
-            <!-- Modal -->
-            <div class="custom-modal-overlay" id="customModal">
-                <div class="custom-modal-content">
-                    <div class="custom-modal-header">
-                        <h5 class="custom-modal-title">Save Compile History</h5>
-                        <button type="button" class="custom-close-btn" id="closeCustomModal">&times;</button>
-                    </div>
-                    <div class="custom-modal-body">
-                        <label for="titleInput" class="title-label">Title</label>
-                        <input type="text" id="titleInput" class="title-input" />
-                    </div>
-                    <div class="custom-modal-footer">
-                        <button type="button" class="custom-modal-close-btn" id="closeCustomModalFooter">Close</button>
-                        <button type="button" class="custom-modal-save-btn">Save history</button>
-                    </div>
-                </div>
-            </div>
+            <partial name="~/Views/Shared/PartialView/PartialModalPopup.cshtml" />
 
             <!-- Upload button -->
             <button class="upload-button tablet-share" type="button">
@@ -69,7 +49,9 @@
     <button class="mobile-run-button run">
         Run
     </button>
-    <div id="editor" >using System;
+    @if (Model == null)
+    {
+        <div id="editor">using System;
 namespace HelloWorld
 {
    class Program
@@ -79,8 +61,13 @@ namespace HelloWorld
          Console.WriteLine("Hello World!");    
        }
     }
-}
-
-    </div>
+}}
+        </div>
+    }
+    else
+    {
+        <div id="editor">@Model.Content
+        </div>
+    }
 </div>
 

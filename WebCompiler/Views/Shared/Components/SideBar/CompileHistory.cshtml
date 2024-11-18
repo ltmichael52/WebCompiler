@@ -1,6 +1,4 @@
-﻿ @model List<CompileHistory>
-
-<div class="sidebar-wrapper" style="width: 15%; color:#FFFFFF;" id="sidebar">
+﻿<div class="sidebar-wrapper" style="width: 15%; color:#FFFFFF;" id="sidebar">
 
     <div class="custom-select-box " style="border-bottom: groove 1px #ccc;">
         <div class="header-and-select">
@@ -10,18 +8,12 @@
             </div>
         </div>
         <div class="select-options" id="selectOptions" style="display: none;">
-            <div class="option" data-icon="https://cdn.playground-v2.programiz.com/assets/icons/python.svg">
+            <a class="option" data-icon="https://cdn.playground-v2.programiz.com/assets/icons/python.svg" asp-controller="Compile" asp-action="Python">
                 <img class="change-lang-btn-icon svg" src="https://cdn.playground-v2.programiz.com/assets/icons/python.svg" alt="Python Online" />
-            </div>
-            <div class="option" data-icon="https://cdn.playground-v2.programiz.com/assets/icons/csharp.svg">
+            </a>
+            <a class="option" data-icon="https://cdn.playground-v2.programiz.com/assets/icons/csharp.svg" asp-controller="Compile" asp-action="CSharp">
                 <img class="change-lang-btn-icon svg" src="https://cdn.playground-v2.programiz.com/assets/icons/csharp.svg" alt="C# Online" />
-            </div>
-            @* <div class="option" data-icon="https://cdn.playground-v2.programiz.com/assets/icons/java.svg">
-                <img class="change-lang-btn-icon svg" src="https://cdn.playground-v2.programiz.com/assets/icons/java.svg" alt="Java Online" />
-            </div>
-            <div class="option" data-icon="https://cdn.playground-v2.programiz.com/assets/icons/javascript.svg">
-                <img class="change-lang-btn-icon svg" src="https://cdn.playground-v2.programiz.com/assets/icons/javascript.svg" alt="JavaScript Online" />
-            </div> *@
+            </a>
         </div>
     </div>
 
@@ -31,17 +23,17 @@
 
     <!-- Today Section -->
     @* <div class="history-category">
-        <p class="time-history-box">Today</p>
-        <ul class="list-group list-group-flush" style="list-style-type: none; padding-left: 0;">
-            <li class="list-group-item history-box">
-                <i class="bi bi-clock-history"></i> Array 2 string
-            </li>
-            <li class="list-group-item history-box">
-                <i class="bi bi-clock-history"></i> Double loop
-            </li>
-        </ul>
+    <p class="time-history-box">Today</p>
+    <ul class="list-group list-group-flush" style="list-style-type: none; padding-left: 0;">
+    <li class="list-group-item history-box">
+    <i class="bi bi-clock-history"></i> Array 2 string
+    </li>
+    <li class="list-group-item history-box">
+    <i class="bi bi-clock-history"></i> Double loop
+    </li>
+    </ul>
     </div> *@
-    
+
     <!-- Yesterday Section -->
     @* <div class="history-category">
     <p class="time-history-box">Yesterday</p>

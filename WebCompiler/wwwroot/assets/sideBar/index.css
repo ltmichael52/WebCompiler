@@ -100,15 +100,12 @@ ul {
         background-color: #3b3e44; /* Change color on hover */
     }
 
-/* Category Heading Styling */
-.history-category h4 {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-size: 16px;
+.history-category {
+    text-decoration: none;
     color: #FFFFFF;
-    border-bottom: 1px solid #474a4f;
-    padding-bottom: 5px;
 }
+/* Category Heading Styling */
+
 
 .time-history-box {
     font-size: 12px;

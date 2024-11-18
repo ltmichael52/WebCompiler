@@ -45,24 +45,3 @@ $(document).off('click', '.custom-modal-save-btn').on('click', '.custom-modal-sa
 });
 
 
-$(document).on('click', '.history-category', function () {
-
-    const compileId = $(this).data('id');
-    // Get the language from ViewBag.language
-    $.ajax({
-        url: '/CompileHistory/showOldCompile',
-        type: 'GET',
-        data: { compileId: compileId },
-        success: function (response) {
-            // Decode HTML entities
-            const decodedContent = $("<textarea/>").html(response).text();
-
-            // Set the decoded content to Ace Editor
-            editor.setValue(decodedContent, -1);
-        },
-        error: function (xhr, status, error) {
-            console.error("Error loading compile history:", error);
-            alert("Failed to load compile history. Please try again.");
-        }
-    });
-});
