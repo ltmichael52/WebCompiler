@@ -11,7 +11,7 @@ namespace WebCompiler.Controllers
         [HttpGet("python")]
         public IActionResult Python()
         {
-            ViewBag.language = "python";
+            HttpContext.Session.SetString("language","python");
             return View();
         }
 
@@ -21,7 +21,7 @@ namespace WebCompiler.Controllers
         [HttpGet("csharp")]
         public IActionResult CSharp()
         {
-            ViewBag.language = "csharp";
+            HttpContext.Session.SetString("language", "csharp");
             return View();
         }
 

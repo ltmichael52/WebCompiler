@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebCompiler.Models;
 
@@ -34,14 +35,15 @@ namespace WebCompiler.Services
             db.CompileHistories.Add(newHistory); // Adjust to match your DbSet name
             db.SaveChanges();
 
-            List<CompileHistory> cpList = db.CompileHistories.Where(x => x.AccountId == accountId).ToList();
+            List<CompileHistory> cpList = db.CompileHistories.Where(x => x.AccountId == accountId).OrderByDescending(x=>x.CompileDate).ToList();
             return PartialView("~/Views/Shared/PartialView/PartialCompileHistory.cshtml", cpList);
         }
 
         public IActionResult showOldCompile(int compileId)
         {
+
             CompileHistory cpHistory = db.CompileHistories.FirstOrDefault(c => c.Id == compileId);
-            ViewBag.language = cpHistory.CodeLanguage;
+            HttpContext.Session.SetString("language", cpHistory.CodeLanguage);
             switch (cpHistory.CodeLanguage)
             {
                 case "csharp":
@@ -51,6 +53,19 @@ namespace WebCompiler.Services
 
         }
 
+        public IActionResult DeleteOldCompile(int compileId,string currentLanguage)
+        {
+            CompileHistory cpHistory = db.CompileHistories.FirstOrDefault(c => c.Id == compileId);
+            db.CompileHistories.Remove(cpHistory);
+            db.SaveChanges();
+
+            switch (currentLanguage)
+            {
+                case "csharp":
+                    return View("~/Views/Compile/CSharp.cshtml");
+            }
+            return View("~/Views/Compile/Python.cshtml");
+        }
 
 
 

@@ -1,6 +1,6 @@
 ﻿@model CompileHistory
 
-<div class="editor-wrapper" id="root" data-lang="@ViewBag.language">
+<div class="editor-wrapper" id="root" data-lang="@Context.Session.GetString("language")">
     <div class="editor-desktop-top-bar">
         <div class="file-name">
             Main.cs
@@ -61,7 +61,7 @@ namespace HelloWorld
          Console.WriteLine("Hello World!");    
        }
     }
-}}
+}
         </div>
     }
     else

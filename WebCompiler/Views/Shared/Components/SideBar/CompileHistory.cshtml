@@ -4,7 +4,7 @@
         <div class="header-and-select">
             <h3 class="d-inline">Language:</h3>
             <div class="select-box" id="selectBox">
-                <img id="selectedIcon" class="change-lang-btn-icon svg" src="https://cdn.playground-v2.programiz.com/assets/icons/@(ViewBag.language).svg" alt="Selected Icon">
+                <img id="selectedIcon" class="change-lang-btn-icon svg" src="https://cdn.playground-v2.programiz.com/assets/icons/@(Context.Session.GetString("language")).svg" alt="Selected Icon">
             </div>
         </div>
         <div class="select-options" id="selectOptions" style="display: none;">

@@ -2,12 +2,19 @@
 
 @foreach (CompileHistory cpHistory in Model)
 {
-    <a class="history-category" asp-controller="CompileHistory" asp-action="showOldCompile" asp-route-compileId="@cpHistory.Id">
-        <ul class="list-group list-group-flush" style="list-style-type: none; padding-left: 0;">
-            <li class="list-group-item history-box">
-                <i class="bi bi-clock-history"></i>@cpHistory.Title
-            </li>
-        </ul>
-    </a>
+    <div class="history-category history-box">
+        <!-- First anchor tag on the left -->
+        <a class="history-category-atag" asp-controller="CompileHistory" asp-action="showOldCompile" asp-route-compileId="@cpHistory.Id">
+            <i class="bi bi-clock-history"></i>@cpHistory.Title
+        </a>
+
+        <!-- Second anchor tag (close icon) on the right -->
+        <a class="history-category-atag close-btn" asp-controller="CompileHistory" asp-action="DeleteOldCompile" 
+        asp-route-compileId="@cpHistory.Id">
+            <p>@ViewBag.language</p>
+            <i class="bi bi-x-circle close-icon"></i>
+        </a>
+    </div>
+
 }
 
