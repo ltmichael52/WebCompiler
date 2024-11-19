@@ -2,97 +2,22 @@
 <html>
 
 <head>
+    @* Compile History *@
     <title>Online C# Compiler</title>
     <link rel="shortcut icon" href="~/assets/icons/logo.png" />
+    <mimeMap fileExtension=".woff" mimeType="application/font-woff" />
     <link rel="stylesheet" type="text/css" href="/fonts/font.css">
-    <link rel="stylesheet" href="https://cdn.playground-v2.programiz.com/playground.css?v=1fsaf" />
+    <link rel="stylesheet" type="text/css" href="~/assets/modalPopup/index.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/chatboAI/index.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/sideBar/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" />
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.11/ace.js"></script>
+    <script src="https://cmp.uniconsent.com/v2/stub.min.js"></script>
+    <script async src='https://cmp.uniconsent.com/v2/a8d3ae4937/cmp.js'></script>
+    <link rel="stylesheet" href="https://cdn.playground-v2.programiz.com/playground.css?v=1fsaf" />
     <link rel="stylesheet" type="text/css" href="/css/site.css" asp-append-version="true">
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.11/ace.js"></script>
-     <script src="https://cmp.uniconsent.com/v2/stub.min.js"></script>
-     <script async src='https://cmp.uniconsent.com/v2/a8d3ae4937/cmp.js'></script>
-     <link rel="stylesheet" href="https://cdn.playground-v2.programiz.com/playground.css?v=1fsaf" />
-     <link rel="stylesheet" type="text/css" href="/css/site.css">
-     <link rel="stylesheet" type="text/css" href="~/assets/modalPopup/index.css">
-     <link rel="stylesheet" type="text/css" href="~/assets/sideBar/index.css">
-    <style>
-        /* Chat box styling */
-        .chat-box {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 300px;
-            max-height: 400px;
-            background-color: #ffffff;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
-            display: none; /* Ẩn chat box mặc định */
-        }
 
-        .chat-header {
-            background-color: #f0f0f0;
-            padding: 10px;
-            font-weight: bold;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .chat-content {
-            padding: 10px;
-            flex: 1;
-            overflow-y: auto;
-            font-size: 14px;
-        }
-
-        .chat-input {
-            display: flex;
-            border-top: 1px solid #ddd;
-        }
-
-            .chat-input input {
-                flex: 1;
-                padding: 8px;
-                border: none;
-                border-radius: 0 0 0 10px;
-                outline: none;
-                font-size: 14px;
-            }
-
-            .chat-input button {
-                padding: 8px 10px;
-                background-color: #007bff;
-                color: #fff;
-                border: none;
-                cursor: pointer;
-                border-radius: 0 0 10px 0;
-            }
-
-   
-                .chat-input button:hover {
-                    background-color: #0056b3;
-                }
-
-        /* Nút ẩn/hiện chat box */
-        .toggle-chat-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 340px;
-            padding: 8px 12px;
-            background-color: #007bff;
-            color: #ffffff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-        }
-    </style>
 </head>
 
 <body>
@@ -145,71 +70,30 @@
     </div>
 
     <script>
-        // Hide spinner and show main content
-        document.addEventListener("DOMContentLoaded", function () {
-            document.querySelector('.spinner').style.display = 'none';
-            document.querySelector('.wrapper').style.display = 'block';
-        });
-
-        // Hàm để ẩn/hiện chat box
-        function toggleChatBox() {
-            const chatBox = document.getElementById('chatBox');
-            chatBox.style.display = chatBox.style.display === 'none' ? 'flex' : 'none';
-        }
-
-        // JavaScript to handle chat messages
-        async function sendMessage() {
-            const input = document.getElementById('chatInput');
-            const message = input.value.trim();
-            if (message) {
-                const chatContent = document.getElementById('chatContent');
-                const userMessage = document.createElement('div');
-                userMessage.textContent = "You: " + message;
-                chatContent.appendChild(userMessage);
-
-                // Clear input
-                input.value = '';
-
-                // Gửi tin nhắn đến API backend
-                const response = await fetch('/api/Chatbox/sendMessage', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: message })
-                });
-
-                const data = await response.json();
-                const aiMessage = document.createElement('div');
-                aiMessage.textContent = "AI: " + data.response;
-                aiMessage.style.color = 'blue';
-                chatContent.appendChild(aiMessage);
-
-                // Cuộn xuống dưới cùng của chat
-                chatContent.scrollTop = chatContent.scrollHeight;
-            }
-        }
-    </script>
-    <script>
         document.addEventListener("DOMContentLoaded", function () {
             document.querySelector('.spinner').style.display = 'none';
             document.querySelector('.wrapper').style.display = 'block';
         });
     </script>
+    @* Compile History *@
     <!-- Other JavaScript files -->
     <script defer src="~/js/shareCode.js"></script>
-    <script defer src="~/js/compileHistory.js"></script>
     <script defer src="~/js/uploadFile.js"></script>
     <script defer src="~/js/changeSideBar.js"></script>
     <script defer src="~/js/hideSpinner.js"></script>
     <script defer src="~/assets/modalPopup/index.js"></script>
     <script defer src="~/assets/sideBar/index.js"></script>
+    <script defer src="~/assets/chatboAI/index.js"></script>
+    <script defer src="~/js/CompilerHandler.js" asp-append-version="true"></script>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.11/ace.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.11/ext-language_tools.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
-    <script defer src="~/js/CompilerHandler.js" asp-append-version="true"></script>
+    <script defer src="https://cdn.playground-v2.programiz.com/build/final.js?v=resize-fixv3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script defer src="~/js/compileHistory.js"></script>
 </body>
 
 </html>
