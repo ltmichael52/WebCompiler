@@ -1,6 +1,20 @@
 ﻿@{
     ViewData["HideTerminal"] = true;
     ViewData["HideSidebar"] = true;
+
+    // List of languages
+    var supportedLanguages = new List<(string Name, string Icon, string Action)> {
+        ("C#", "Csharp.png", "CSharp"),
+        ("Python", "Python.png", "Python"),
+        ("Java", "Java.png", "Java"),
+        ("C++", "C++.png", "C++"),
+        ("JS", "JavaScript.png", "JavaScript")
+
+    };
+
+    supportedLanguages = supportedLanguages
+    .Where(lang => !new[] { "" }.Contains(lang.Name))
+    .ToList();
 }
 
 <!DOCTYPE html>
@@ -19,18 +33,15 @@
 
         <!-- Button Section -->
         <div class="button-container">
-            <a asp-controller="Compile" asp-action="CSharp" class="language-button">
-                <span>C#</span>
-                <span class="icon">
-                    <img src="~/assets/icons/Csharp.png" alt="C# Icon">
-                </span>
-            </a>
-            <a asp-controller="Compile" asp-action="Python" class="language-button">
-                <span>Python</span>
-                <span class="icon">
-                    <img src="~/assets/icons/Python.png" alt="Python Icon">
-                </span>
-            </a>
+            @foreach (var language in supportedLanguages)
+            {
+                <a asp-controller="Compile" asp-action="@language.Action" class="language-button">
+                    <span>@language.Name</span>
+                    <span class="icon">
+                        <img src="~/assets/icons/@language.Icon" alt="@language.Name Icon">
+                    </span>
+                </a>
+            }
         </div>
     </div>
 </body>
