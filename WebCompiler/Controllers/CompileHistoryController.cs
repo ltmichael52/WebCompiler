@@ -1,6 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using WebCompiler.Models;
 
 namespace WebCompiler.Services
@@ -35,14 +33,18 @@ namespace WebCompiler.Services
             db.CompileHistories.Add(newHistory); // Adjust to match your DbSet name
             db.SaveChanges();
 
-            List<CompileHistory> cpList = db.CompileHistories.Where(x => x.AccountId == accountId).OrderByDescending(x=>x.CompileDate).ToList();
-            return PartialView("~/Views/Shared/PartialView/PartialCompileHistory.cshtml", cpList);
+            List<CompileHistory> cpList = db.CompileHistories.Where(x => x.AccountId == accountId).OrderByDescending(x => x.CompileDate).ToList();
+            return PartialView("~/Views/Shared/_CompileHistory.cshtml", cpList);
         }
 
         public IActionResult showOldCompile(int compileId)
         {
 
-            CompileHistory cpHistory = db.CompileHistories.FirstOrDefault(c => c.Id == compileId);
+            CompileHistory? cpHistory = db.CompileHistories.FirstOrDefault(c => c.Id == compileId);
+            if (cpHistory == null)
+            {
+                throw new Exception($"No CompileHistory found with ID {compileId}");
+            }
             HttpContext.Session.SetString("language", cpHistory.CodeLanguage);
             switch (cpHistory.CodeLanguage)
             {
@@ -53,9 +55,13 @@ namespace WebCompiler.Services
 
         }
 
-        public IActionResult DeleteOldCompile(int compileId,string currentLanguage)
+        public IActionResult DeleteOldCompile(int compileId, string currentLanguage)
         {
-            CompileHistory cpHistory = db.CompileHistories.FirstOrDefault(c => c.Id == compileId);
+            CompileHistory? cpHistory = db.CompileHistories.FirstOrDefault(c => c.Id == compileId);
+            if (cpHistory == null)
+            {
+                throw new Exception($"No CompileHistory found with ID {compileId}");
+            }
             db.CompileHistories.Remove(cpHistory);
             db.SaveChanges();
 

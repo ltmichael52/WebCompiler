@@ -1,7 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Razor;
-using System.Diagnostics;
-using WebCompiler.Models;
 
 namespace WebCompiler.Controllers
 {
@@ -10,7 +7,6 @@ namespace WebCompiler.Controllers
 
         public IActionResult Index()
         {
-            //HttpContext.Session.SetInt32("language", 1);
             return View();
         }
 

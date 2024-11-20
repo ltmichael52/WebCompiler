@@ -8,11 +8,12 @@ public class RedisService : IRedisService
     private readonly string _password;
     private ConnectionMultiplexer _connectionMultiplexer;
 
-    public RedisService(string host, int port, string password = null)
+    public RedisService(string host, int port, string password)
     {
         _host = host;
         _port = port;
         _password = password;
+        _connectionMultiplexer = ConnectionMultiplexer.Connect($"{_host}:{_port},password={_password}");
     }
 
     public void Connect()
@@ -31,11 +32,6 @@ public class RedisService : IRedisService
         {
             Console.WriteLine($"Redis connection failed: {ex.Message}");
         }
-    }
-
-    public bool IsConnected()
-    {
-        return _connectionMultiplexer?.IsConnected ?? false;
     }
 
     public void SaveCode(string key, string code, string language)
@@ -62,19 +58,24 @@ public class RedisService : IRedisService
     {
         if (!IsConnected())
         {
-            Console.WriteLine("Not connected to Redis.");
-            return null;
+            throw new InvalidOperationException("Not connected to Redis.");
         }
 
         try
         {
             var db = _connectionMultiplexer.GetDatabase();
-            return db.StringGet(key);
+            var result = db.StringGet(key);
+
+            if (result.IsNullOrEmpty)
+            {
+                throw new KeyNotFoundException($"The key '{key}' was not found or its value is empty.");
+            }
+
+            return result!;
         }
         catch (RedisException ex)
         {
-            Console.WriteLine($"Failed to retrieve code from Redis: {ex.Message}");
-            return null;
+            throw new ApplicationException($"Failed to retrieve the code from Redis: {ex.Message}", ex);
         }
     }
 
@@ -82,20 +83,31 @@ public class RedisService : IRedisService
     {
         if (!IsConnected())
         {
-            Console.WriteLine("Not connected to Redis.");
-            return null;
+            throw new InvalidOperationException("Not connected to Redis.");
         }
 
         try
         {
             var db = _connectionMultiplexer.GetDatabase();
-            return db.StringGet(key + ":lang");
+            var result = db.StringGet(key + ":lang");
+
+            if (result.IsNullOrEmpty)
+            {
+                throw new KeyNotFoundException($"The language for key '{key}' was not found or its value is empty.");
+            }
+
+            return result!;
         }
         catch (RedisException ex)
         {
-            Console.WriteLine($"Failed to get language from Redis: {ex.Message}");
-            return null;
+            throw new ApplicationException($"Failed to retrieve language from Redis: {ex.Message}", ex);
         }
     }
 
+
+
+    public bool IsConnected()
+    {
+        return _connectionMultiplexer?.IsConnected ?? false;
+    }
 }

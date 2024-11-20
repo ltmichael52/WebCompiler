@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace WebCompiler.Models;
+﻿namespace WebCompiler.Models;
 
 public partial class CompileHistory
 {
