@@ -15,8 +15,24 @@ namespace WebCompiler.Controllers
         {
             _configuration = configuration;
         }
+
         private SemaphoreSlim _rateLimiter = new SemaphoreSlim(1, 1); // Max 1 concurrent request
         private TimeSpan _rateLimitInterval = TimeSpan.FromMilliseconds(500); // 1 second between requests (adjust)
+        private async Task<string> GetAccessTokenAsync(string serviceAccountJsonPath)
+        {
+            // Load the Service Account JSON key
+            GoogleCredential credential;
+            using (var stream = new FileStream(serviceAccountJsonPath, FileMode.Open, FileAccess.Read))
+            {
+                credential = GoogleCredential.FromStream(stream)
+                    .CreateScoped("https://www.googleapis.com/auth/cloud-platform");
+            }
+
+            // Request an access token
+            var token = await credential.UnderlyingCredential.GetAccessTokenForRequestAsync();
+            return token;
+        }
+
         [HttpPost("sendMessage")]
         public async Task<IActionResult> SendMessage([FromBody] ChatRequest request)
         {
@@ -31,8 +47,13 @@ namespace WebCompiler.Controllers
                 string path = $"/v1/projects/{projectId}/locations/{location}/publishers/google/models/{modelId}:generateContent";
                 string url = $"https://{endpoint}{path}";
 
+                // Path to your service account JSON file
+                string serviceAccountJsonPath = _configuration["GoogleCloud:ServiceAccountPath"];
+
+                // Get the Access Token dynamically
+                string accessToken = await GetAccessTokenAsync(serviceAccountJsonPath);
+
                 var httpClient = new HttpClient();
-                string accessToken = "ya29.a0AeDClZD1lqHdrqUJ3njYIcgM8FvzSwK4_KB9C2aaabasXK-jhvJv1SElD2vTKZpHLD7DinyINIu7CLGF2as_nf6FO3m7GMY7TlJBYewEF96NvdtEs9O2LWQ9nrDp4SpV3dbG8QnU2mj11ni381rS5a5F0phWlQ1e7yjzIMygWRfCogaCgYKAS8SARMSFQHGX2MiwicWO0xs_Ws-BBlUNFD1Mg0181"; //  DANGER! REMOVE THIS IN PRODUCTION!
 
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
