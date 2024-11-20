@@ -12,7 +12,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient();
 
 // Redis Service 
-builder.Services.AddScoped(sp => new RedisService("redis-13076.c292.ap-southeast-1-1.ec2.redns.redis-cloud.com", 13076, "Mcre4XSFEzmb4C0SRoGDSQTx25kUTonC"));
+builder.Services.AddScoped(redis => new RedisService("redis-13076.c292.ap-southeast-1-1.ec2.redns.redis-cloud.com", 13076, "Mcre4XSFEzmb4C0SRoGDSQTx25kUTonC"));
 
 // Infrastructure
 builder.Services.AddDbContext<WebCompilerContext>(options =>

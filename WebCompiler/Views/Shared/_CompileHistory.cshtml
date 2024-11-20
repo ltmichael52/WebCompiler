@@ -11,6 +11,7 @@
         <!-- Second anchor tag (close icon) on the right -->
         <a class="history-category-atag close-btn" asp-controller="CompileHistory" asp-action="DeleteOldCompile" 
         asp-route-compileId="@cpHistory.Id">
+            <p>@ViewBag.language</p>
             <i class="bi bi-x-circle close-icon"></i>
         </a>
     </div>

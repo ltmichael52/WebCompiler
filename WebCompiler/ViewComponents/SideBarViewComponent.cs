@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
 using WebCompiler.Models;
 
 namespace WebCompiler.ViewComponents
@@ -29,7 +26,7 @@ namespace WebCompiler.ViewComponents
             else
             {
                 List<CompileHistory> cpHistory = _db.CompileHistories
-                    .Where(c=>c.AccountId == accountId)
+                    .Where(c => c.AccountId == accountId)
                     .ToList();
 
                 return View("CompileHistory", cpHistory);
