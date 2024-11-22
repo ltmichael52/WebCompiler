@@ -1,11 +1,9 @@
-﻿@{
-    ViewData["Title"] = "View Shared Code";
-    Layout = "_Layout"; // This disables the layout for this specific view.
-}
-<div class="editor-wrapper" id="root" data-lang="@ViewBag.language">
+﻿@model CompileHistory
+
+<div class="editor-wrapper" id="root" data-lang="@Context.Session.GetString("language")">
     <div class="editor-desktop-top-bar">
         <div class="file-name">
-            Untitle
+            Main.java
         </div>
         <div class="desktop-top-bar__btn-wrapper">
             <!-- Fullscreen toggle button -->
@@ -36,7 +34,7 @@
                     </svg>
                 </label>
             </button>
-
+          
             <!-- Dark mode toggle button -->
             <button type="button" id="toggle-dark-mode-desktop" title="Toggle dark mode">
                 <img class="toggle-dark-mode-mobile-icon moon svg" src="https://cdn.playground-v2.programiz.com/assets/icons/moon.svg" />
@@ -57,6 +55,25 @@
             </button>
         </div>
     </div>
-    <div id="editor">@Html.Raw(ViewBag.Code)
-    </div>
+    <button class="mobile-run-button run">
+        Run
+    </button>
+    @if (Model == null)
+    {
+        <div id="editor">// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+class Main {
+    public static void main(String[] args) {
+        System.out.println("Try programiz.pro");
+    }
+}
+        </div>
+    }
+    else
+    {
+        <div id="editor">@Html.Raw(Model.Content)
+        </div>
+    }
 </div>
+

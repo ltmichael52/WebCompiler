@@ -29,41 +29,33 @@ namespace WebCompiler.Controllers
         [HttpPost]
         public async Task<ActionResult> SaveCode()
         {
-            if (!Request.ContentType?.Contains("application/json") ?? true)
+            if (!Request.ContentType.Contains("application/json"))
             {
                 return BadRequest("Content-Type should be application/json");
             }
 
-            string jsonData;
-            using (var reader = new StreamReader(Request.Body))
-            {
-                jsonData = await reader.ReadToEndAsync();
-            }
+            var reader = new StreamReader(Request.Body);
+            var jsonData = await reader.ReadToEndAsync();
 
             if (string.IsNullOrWhiteSpace(jsonData))
             {
                 return BadRequest("Empty request body");
             }
 
-            try
-            {
-                var data = JsonConvert.DeserializeObject<CodeData>(jsonData);
+            dynamic data = JsonConvert.DeserializeObject(jsonData);
+            string content = data?.content;
+            string language = data?.lang;
 
-                if (data == null || string.IsNullOrWhiteSpace(data.Content) || string.IsNullOrWhiteSpace(data.Language))
-                {
-                    return BadRequest("Invalid JSON format or missing 'content' field");
-                }
-
-                string key = Guid.NewGuid().ToString();
-                _redisService.SaveCode(key, data.Content, data.Language);
-
-                string? shareUrl = Url.Action("ViewCode", "Share", new { key }, Request.Scheme);
-                return Json(new { shareUrl });
-            }
-            catch (JsonException)
+            if (content == null)
             {
                 return BadRequest("Invalid JSON format");
             }
+
+            string key = Guid.NewGuid().ToString();
+            _redisService.SaveCode(key, content, language);
+
+            string shareUrl = Url.Action("ViewCode", "Share", new { key }, Request.Scheme);
+            return Json(new { shareUrl });
         }
 
         public IActionResult ViewCode(string key)

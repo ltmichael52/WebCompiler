@@ -1,4 +1,4 @@
-﻿document.addEventListener('DOMContentLoaded', function () {
+﻿document.addEventListener('DOMContentLoaded', () => {
     initializeShareButton();
 });
 
@@ -13,10 +13,10 @@ function initializeShareButton() {
 
 function handleShareClick() {
     const language = getEditorLanguage();
-    const codeContent = getEditorCode(language);
+    const codeContent = getEditorCode();
     sendCodeToServer(codeContent, language)
         .then(data => displayShareModal(data.shareUrl))
-        .catch(error => handleShareError(error));
+        .catch(handleShareError);
 }
 
 function getEditorLanguage() {
@@ -24,81 +24,35 @@ function getEditorLanguage() {
     return editorWrapper ? editorWrapper.getAttribute('data-lang') : null;
 }
 
-function getEditorCode(language) {
+function getEditorCode() {
     const editorLines = document.querySelectorAll('#editor .ace_line_group');
-    const codeProcessors = {
-        python: processPythonCode,
-        csharp: processCSharpCode,
-        default: processCSharpCode,
-    };
-    const processCode = codeProcessors[language] || codeProcessors.default;
     return processCode(editorLines);
 }
 
-function processPythonCode(editorLines) {
-    let code = Array.from(editorLines)
+function processCode(editorLines) {
+    return Array.from(editorLines)
         .map(line => {
-            // Get the raw HTML content of the line
             let lineContent = line.innerHTML;
 
-            // Replace &nbsp; with a single space
+            // Replace &nbsp; with a regular space
             lineContent = lineContent.replace(/\s*(&nbsp;)+/g, ' ');
 
-            // Process comments (Python uses `#` for single-line comments)
-            lineContent = lineContent.replace(/(<span class="ace_comment">.*?<\/span>)/g, match => {
-                // Remove extra spaces inside comments
-                return match.replace(/\s+/g, ' ').trim();
-            });
+            // Handle comments
+            lineContent = lineContent.replace(/(<span class="ace_comment">.*?<\/span>)/g, match =>
+                match.replace(/\s+/g, ' ')
+            );
 
-            // Process strings (Python uses single, double, or triple quotes)
-            lineContent = lineContent.replace(/(<span class="ace_string">.*?<\/span>)/g, match => {
-                // Remove extra spaces inside strings
-                return match
+            // Handle strings
+            lineContent = lineContent.replace(/(<span class="ace_string">.*?<\/span>)/g, match =>
+                match
                     .replace(/>\s+/g, '>') // Remove spaces after the opening tag
                     .replace(/\s+</g, '<') // Remove spaces before the closing tag
-                    .replace(/\s+/g, ' ') // Normalize spaces between words
-                    .trim();
-            });
+                    .replace(/\s+/g, ' ')  // Normalize spaces within the string
+            );
 
             return lineContent;
         })
         .join('\n'); // Combine all lines into one block of code
-
-    console.log(code); // Debug output to check the result
-    return code;
-}
-
-function processCSharpCode(editorLines) {
-    let code = Array.from(editorLines)
-        .map(line => {
-            // Get the raw HTML content of the line
-            let lineContent = line.innerHTML;
-
-            // Replace with normal spaces
-            lineContent = lineContent.replace(/\s*(&nbsp;)+/g, ' ');
-
-            // Process comments
-            lineContent = lineContent.replace(/(<span class="ace_comment">.*?<\/span>)/g, match => {
-                // Remove extra spaces inside comments
-                return match.replace(/\s+/g, ' ').trim();
-            });
-
-            // Process strings
-            lineContent = lineContent.replace(/(<span class="ace_string">.*?<\/span>)/g, match => {
-                // Remove extra spaces inside strings
-                return match
-                    .replace(/>\s+/g, '>') // Remove spaces after the opening tag
-                    .replace(/\s+</g, '<') // Remove spaces before the closing tag
-                    .replace(/\s+/g, ' ') // Normalize spaces between words
-                    .trim();
-            });
-
-            return lineContent;
-        })
-        .join('\n'); // Combine all lines into one block of code
-
-    console.log(code); // Debug output to check the result
-    return code;
 }
 
 function sendCodeToServer(content, lang) {
@@ -130,7 +84,7 @@ function displayShareModal(shareUrl) {
         `;
         modal.style.display = 'block';
 
-        window.closeModal = function () {
+        window.closeModal = () => {
             modal.style.display = 'none';
         };
     } else {
