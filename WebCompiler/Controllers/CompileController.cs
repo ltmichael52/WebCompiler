@@ -26,12 +26,22 @@ namespace WebCompiler.Controllers
         }
 
         /// <summary>
-        /// CSharp Compiler
+        /// Java Compiler
         /// </summary>
         [HttpGet("java")]
         public IActionResult Java()
         {
             HttpContext.Session.SetString("language", "java");
+            return View();
+        }
+
+        /// <summary>
+        /// JavaScript Compiler
+        /// </summary>
+        [HttpGet("javascript")]
+        public IActionResult JavaScript()
+        {
+            HttpContext.Session.SetString("language", "javascript");
             return View();
         }
 

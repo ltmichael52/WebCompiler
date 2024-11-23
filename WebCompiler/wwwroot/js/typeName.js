@@ -8,6 +8,7 @@
             csharp: "C# Online Compiler",
             python: "Python Online Compiler",
             java: "Java Online Compiler",
+            javascript: "JavaScript Online Compiler",
         };
 
         // Update title for page
@@ -22,6 +23,7 @@
             csharp: "C# Online Compiler",
             python: "Python Online Compiler",
             java: "Java Online Compiler",
+            javascript: "JavaScript Online Compiler",
         };
 
         // Update title for logo
@@ -36,6 +38,7 @@
             csharp: "Main.cs",
             python: "main.py",
             java: "Main.java",
+            javascript: "Main.js",
         };
 
         // Name display
