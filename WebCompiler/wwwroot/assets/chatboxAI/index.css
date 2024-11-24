@@ -1,11 +1,13 @@
 ﻿body {
+    font-family: Arial, sans-serif;
 }
+
 .chat-box {
     position: fixed;
     bottom: 20px;
-    right: 20px;
-    width: 300px;
-    max-height: 400px;
+    right: 120px;
+    width: 400px;
+    max-height: 600px;
     background-color: #ffffff;
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -14,7 +16,7 @@
     flex-direction: column;
     overflow: hidden;
     font-family: Arial, sans-serif;
-    display: none; /* Ẩn chat box mặc định */
+    display: none;
 }
 
 .chat-header {
@@ -58,11 +60,11 @@
         .chat-input button:hover {
             background-color: #0056b3;
         }
-/* Nút ẩn/hiện chat box */
+
 .toggle-chat-btn {
     position: fixed;
     bottom: 20px;
-    right: 340px;
+    right: 20px;
     padding: 8px 12px;
     background-color: #007bff;
     color: #ffffff;
@@ -72,3 +74,78 @@
     font-size: 14px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+/* Định dạng phần nội dung Markdown */
+.markdown {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+}
+
+    .markdown h1, .markdown h2, .markdown h3 {
+        font-weight: bold;
+        margin: 10px 0 5px;
+    }
+
+    .markdown ul {
+        padding-left: 20px;
+        margin: 5px 0;
+    }
+
+    .markdown li {
+        margin: 5px 0;
+    }
+
+    .markdown p {
+        margin: 5px 0;
+    }
+
+/* Định dạng cho phần chat chung */
+.chat-content {
+    padding: 10px;
+    flex: 1;
+    overflow-y: auto; /* Đảm bảo khung chat chính có thể cuộn */
+    font-size: 14px;
+}
+
+/* Tách riêng tin nhắn của AI và người dùng */
+.user-message, .ai-message {
+    margin: 5px 0;
+    padding: 5px 10px;
+    border-radius: 8px;
+    max-width: 98%;
+    word-wrap: break-word;
+}
+
+.user-message {
+    background-color: #e9f7fe;
+    align-self: flex-end;
+    text-align: left;
+}
+
+.ai-message {
+    background-color: #f1f0f0;
+    align-self: flex-start;
+    text-align: left;
+}
+
+    /* Định dạng riêng cho phần text */
+    .ai-message .text-block {
+        margin: 5px 0;
+        padding: 5px 10px;
+    }
+
+    /* Định dạng cho phần code */
+    .ai-message .code-block {
+        background-color: #f5f5f5;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin: 5px 0;
+        padding: 10px;
+        font-family: "Courier New", monospace;
+        font-size: 13px;
+        max-height: 200px; /* Đặt chiều cao tối đa */
+        overflow-y: auto; /* Cuộn riêng phần code */
+        white-space: pre-wrap; /* Bọc dòng trong code */
+    }

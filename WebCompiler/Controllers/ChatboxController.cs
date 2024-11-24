@@ -1,6 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
+using System.Threading;
+using WebCompiler.Models;
+using Markdig;
+using Google.Apis.Auth.OAuth2;
 using WebCompiler.Models.DTOs;
 
 namespace WebCompiler.Controllers
@@ -54,15 +59,12 @@ namespace WebCompiler.Controllers
                 string accessToken = await GetAccessTokenAsync(serviceAccountJsonPath);
 
                 var httpClient = new HttpClient();
-
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-
                 var requestBody = new
                 {
-                    contents = new[] { new { role = "USER", parts = new[] { new { text = request.Message } } } } // Simplified
-                                                                                                                 // Add generationConfig and safetySettings if needed.
+                    contents = new[] { new { role = "USER", parts = new[] { new { text = request.Message } } } }
                 };
 
                 string jsonRequest = System.Text.Json.JsonSerializer.Serialize(requestBody);
@@ -73,32 +75,31 @@ namespace WebCompiler.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     string responseJson = await response.Content.ReadAsStringAsync();
-                    //  Parse the JSON response to extract the text.  You'll likely need a JSON library like Newtonsoft.Json
-                    // Example (using Newtonsoft.Json):
-                    dynamic responseData = Newtonsoft.Json.JsonConvert.DeserializeObject(responseJson);
-                    string responseText = responseData.candidates[0].content.parts[0].text;
+                    try
+                    {
+                        dynamic responseData = Newtonsoft.Json.JsonConvert.DeserializeObject(responseJson);
+                        string rawResponseText = responseData.candidates[0].content.parts[0].text;
 
+                        // Use Markdig to render Markdown
+                        var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
+                        string htmlResponse = Markdig.Markdown.ToHtml(rawResponseText, pipeline);
 
-                    return Ok(new { response = responseText });
+                        return Ok(new { response = htmlResponse });
+                    }
+                    catch (Newtonsoft.Json.JsonReaderException jex)
+                    {
+                        return StatusCode(500, $"Error parsing JSON response: {jex.Message}");
+                    }
+                    catch (Exception ex)
+                    {
+                        return StatusCode(500, $"Error processing Gemini response: {ex.Message}");
+                    }
                 }
                 else
                 {
                     string errorMessage = await response.Content.ReadAsStringAsync();
-                    return StatusCode((int)response.StatusCode, $"Error: {response.StatusCode} - {errorMessage}"); // Include status code and error message
+                    return StatusCode((int)response.StatusCode, $"Error: {response.StatusCode} - {errorMessage}");
                 }
-
-            }
-            catch (Exception ex)
-            {
-                // Log the full exception details, including inner exceptions
-                while (ex != null)
-                {
-                    Console.WriteLine($"Exception: {ex.Message}"); // Or use a logging library
-                    ex = ex.InnerException;
-                }
-
-                return StatusCode(500, $"Error communicating with Gemini: {ex?.Message}"); // Return the innermost exception message if available
-
             }
             finally
             {
