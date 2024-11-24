@@ -1,11 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Google.Apis.Auth.OAuth2;
+using Google.Cloud.AIPlatform.V1;
+using Google.Protobuf;
+using Grpc.Core;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using WebCompiler.Models;
 using Markdig;
-using Google.Apis.Auth.OAuth2;
 using WebCompiler.Models.DTOs;
 
 namespace WebCompiler.Controllers
@@ -47,19 +51,12 @@ namespace WebCompiler.Controllers
                 string projectId = "gen-lang-client-0697396523";  // Replace with your project ID
                 string location = "us-central1"; // Or us-central1 or your model's location
                 string modelId = "gemini-1.5-flash-001";  // Or the name of your model
+                string apikey = "AIzaSyAZ75d1xM93LG4YPoR99rDObteYJomEifA";  // Your API key
 
-                string endpoint = $"{location}-aiplatform.googleapis.com";
-                string path = $"/v1/projects/{projectId}/locations/{location}/publishers/google/models/{modelId}:generateContent";
-                string url = $"https://{endpoint}{path}";
-
-                // Path to your service account JSON file
-                string serviceAccountJsonPath = _configuration["GoogleCloud:ServiceAccountPath"];
-
-                // Get the Access Token dynamically
-                string accessToken = await GetAccessTokenAsync(serviceAccountJsonPath);
+                // Construct the request URL with the API key
+                string url = $"https://generativelanguage.googleapis.com/v1/models/{modelId}:generateContent?key={apikey}";
 
                 var httpClient = new HttpClient();
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 var requestBody = new
@@ -107,5 +104,6 @@ namespace WebCompiler.Controllers
                 _rateLimiter.Release();                // Release the semaphore         
             }
         }
+
     }
 }
