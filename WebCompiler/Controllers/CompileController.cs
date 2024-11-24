@@ -11,7 +11,7 @@ namespace WebCompiler.Controllers
         [HttpGet("python")]
         public IActionResult Python()
         {
-            HttpContext.Session.SetString("language","python");
+            HttpContext.Session.SetString("language", "python");
             return View();
         }
 
@@ -42,6 +42,16 @@ namespace WebCompiler.Controllers
         public IActionResult JavaScript()
         {
             HttpContext.Session.SetString("language", "javascript");
+            return View();
+        }
+
+        /// <summary>
+        /// C++ Compiler
+        /// </summary>
+        [HttpGet("Cpp")]
+        public IActionResult Cpp()
+        {
+            HttpContext.Session.SetString("language", "cpp");
             return View();
         }
 

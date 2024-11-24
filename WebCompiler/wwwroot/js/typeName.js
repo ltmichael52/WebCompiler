@@ -9,6 +9,7 @@
             python: "Python Online Compiler",
             java: "Java Online Compiler",
             javascript: "JavaScript Online Compiler",
+            cpp: "C++ Online Compiler"
         };
 
         // Update title for page
@@ -24,6 +25,7 @@
             python: "Python Online Compiler",
             java: "Java Online Compiler",
             javascript: "JavaScript Online Compiler",
+            cpp: "C++ Online Compiler",
         };
 
         // Update title for logo
@@ -39,6 +41,7 @@
             python: "main.py",
             java: "Main.java",
             javascript: "Main.js",
+            cpp: "main.cpp",
         };
 
         // Name display

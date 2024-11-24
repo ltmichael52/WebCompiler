@@ -1,0 +1,80 @@
+﻿@model CompileHistory
+
+<div class="editor-wrapper" id="root" data-lang="@Context.Session.GetString("language")">
+    <div class="editor-desktop-top-bar">
+        <div class="file-name">
+            main.cpp
+        </div>
+        <div class="desktop-top-bar__btn-wrapper">
+            <!-- Fullscreen toggle button -->
+            <button type="button" id="toggle-expanded-mode-desktop" title="Enter Fullscreen">
+                <img class="toggle-expanded-mode-mobile-icon expand svg" src="https://cdn.playground-v2.programiz.com/assets/icons/expand.svg" />
+                <img class="toggle-expanded-mode-mobile-icon minimize hidden svg" src="https://cdn.playground-v2.programiz.com/assets/icons/minimize.svg" />
+            </button>
+
+            <!-- Button trigger modal -->
+            @Html.Partial("~/Views/Shared/_ModalPopup.cshtml")
+
+            <!-- Upload button -->
+            <button class="upload-button tablet-share" type="button">
+                <input type="file" id="fileInput" accept=".txt" />
+                <label for="fileInput">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 50 50" class="upload-icon svg replaced-svg">
+                        <path d="M10.289 32.996a1 1 0 0 0-1 1v6.133a1 1 0 0 0 1 1h28a1 1 0 0 0 1-1v-6.133a1 1 0 1 0-2 0v5.133h-26v-5.133a1 1 0 0 0-1-1z"></path>
+                        <path d="M24.333 34.996a1 1 0 0 0 1-1v-21.51l6.343 6.127a.996.996 0 0 0 1.413-.024 1 1 0 0 0-.024-1.414l-8.023-7.751-.002-.002-.013-.012c-.036-.035-.081-.05-.12-.078-.064-.046-.123-.097-.196-.127a.997.997 0 0 0-.357-.072c-.007 0-.014-.004-.021-.004s-.014.004-.021.004a1.001 1.001 0 0 0-.357.072c-.073.03-.132.081-.196.126-.039.029-.084.044-.12.079l-.012.011-.002.002-8.023 7.751a1 1 0 0 0 1.389 1.438l6.343-6.127v21.51a.998.998 0 0 0 .999 1.001z"></path>
+                    </svg>
+                </label>
+            </button>
+
+            <!-- Download button -->
+            <button class="download-button tablet-share" type="button" id="downloadButton">
+                <label for="downloadButton" class="download-label">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 50 50" class="download-icon svg replaced-svg">
+                        <path d="M10.289 17.004a1 1 0 0 0-1-1v-6.133a1 1 0 0 0 1-1h28a1 1 0 0 0 1 1v6.133a1 1 0 1 0 2 0v-5.133h-26v5.133a1 1 0 0 0-1 1z"></path>
+                        <path d="M24.333 15.004a1 1 0 0 0-1 1v21.51l-6.343-6.127a.996.996 0 0 0-1.413.024 1 1 0 0 0 .024 1.414l8.023 7.751.002.002.013.012c.036.035.081.05.12.078.064.046.123.097.196.127a.997.997 0 0 0 .357.072c.007 0 .014.004.021.004s.014-.004.021-.004a1.001 1.001 0 0 0 .357-.072c.073-.03.132-.081.196-.126.039-.029.084-.044.12-.079l.012-.011.002-.002 8.023-7.751a1 1 0 0 0-1.389-1.438l-6.343 6.127V16a1 1 0 0 0-1-1z"></path>
+                    </svg>
+                </label>
+            </button>
+
+            <!-- Dark mode toggle button -->
+            <button type="button" id="toggle-dark-mode-desktop" title="Toggle dark mode">
+                <img class="toggle-dark-mode-mobile-icon moon svg" src="https://cdn.playground-v2.programiz.com/assets/icons/moon.svg" />
+                <img class="toggle-dark-mode-mobile-icon sun svg" src="https://cdn.playground-v2.programiz.com/assets/icons/sun.svg" />
+            </button>
+
+            <!-- Share button -->
+            <button class="share-button-code" title="Share">
+                <img class="toggle-expanded-mode-mobile-icon svg share-icon" src="https://cdn.playground-v2.programiz.com/assets/icons/share.svg" />
+                Share
+            </button>
+
+            <!-- Run button -->
+            <button class="desktop-run-button run">
+                <span class="run-text">
+                    &nbsp;Run&nbsp;
+                </span>
+            </button>
+        </div>
+    </div>
+    <button class="mobile-run-button run">
+        Run
+    </button>
+    @if (Model == null)
+    {
+        <div id="editor">
+<pre>
+#include &lt;iostream&gt;
+
+int main() {
+    // Write C++ code here
+    std::cout @Html.Raw("<<") "Try programiz.pro";
+    return 0;
+}
+</pre>
+        </div>
+    }
+    else
+    {
+        <div id="editor">@Html.Raw(Model.Content)</div>
+    }
+</div>
