@@ -4,8 +4,8 @@ pipeline {
         // Docker Hub credentials
         PAT_CREDENTIALS_ID = "PAT_Jenkins"
         DOCKER_CREDENTIALS_ID = "docker-hub" // Set Jenkins Docker Hub credentials ID here
-        DOCKER_IMAGE = "phongtran894/webCompiler:v1" // Change to your desired image name and tag
-        CONTAINER_NAME = "hcmsiu" // Replace with your Docker container name
+        DOCKER_IMAGE = "lemichael52/webcompiler:v1" // Change to your desired image name and tag
+        CONTAINER_NAME = "webcompiler" // Replace with your Docker container name
     }
     
     stages {
@@ -24,12 +24,12 @@ pipeline {
                         echo "Starting Docker build and push stage..."
                         // Build and push the Docker image
                         // docker.withRegistry('https://index.docker.io/v1/', "${DOCKER_CREDENTIALS_ID}") {
-                        //     def app = docker.build("${DOCKER_IMAGE}", "-f HCMSIU/Dockerfile HCMSIU/")
+                        //     def app = docker.build("${DOCKER_IMAGE}", "-f WEBCOMPILER/Dockerfile WEBCOMPILER/")
                         //     app.push()
                         // }
                         withDockerRegistry([credentialsId: "${DOCKER_CREDENTIALS_ID}", url: 'https://index.docker.io/v1/']) {
                             // Build and push the Docker image
-                            sh "docker build -t ${DOCKER_IMAGE} -f HCMSIU/Dockerfile HCMSIU/"
+                            sh "docker build -t ${DOCKER_IMAGE} -f WebCompiler/Dockerfile WebCompiler/"
                             sh "docker push ${DOCKER_IMAGE}"
                         }
 
