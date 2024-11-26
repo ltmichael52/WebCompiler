@@ -12,7 +12,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Pull the code from a private GitHub repository
-                git url: 'https://github.com/ltmichael52/WebCompiler.git', credentialsId: "${PAT_CREDENTIALS_ID}"
+                git url: 'https://github.com/ltmichael52/WebCompiler.git', credentialsId: "${PAT_CREDENTIALS_ID}", branch: 'dev'
                 echo "Update git repo complete"
             }
         }
