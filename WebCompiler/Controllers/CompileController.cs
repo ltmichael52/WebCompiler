@@ -75,5 +75,15 @@ namespace WebCompiler.Controllers
             return View();
         }
 
+        /// <summary>
+        /// R Compiler
+        /// </summary>
+        [HttpGet("R")]
+        public IActionResult R()
+        {
+            HttpContext.Session.SetString("language", "r");
+            return View();
+        }
+
     }
 }
