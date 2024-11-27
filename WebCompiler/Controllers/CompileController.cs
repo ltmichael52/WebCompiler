@@ -65,5 +65,15 @@ namespace WebCompiler.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Go Compiler
+        /// </summary>
+        [HttpGet("go")]
+        public IActionResult Go()
+        {
+            HttpContext.Session.SetString("language", "golang");
+            return View();
+        }
+
     }
 }
