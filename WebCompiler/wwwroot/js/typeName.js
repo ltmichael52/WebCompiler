@@ -9,7 +9,9 @@
             python: "Python Online Compiler",
             java: "Java Online Compiler",
             javascript: "JavaScript Online Compiler",
-            cpp: "C++ Online Compiler"
+            cpp: "C++ Online Compiler",
+            swift: "Swift Online Compiler",
+            golang: "Go Online Compiler",
         };
 
         // Update title for page
@@ -26,6 +28,8 @@
             java: "Java Online Compiler",
             javascript: "JavaScript Online Compiler",
             cpp: "C++ Online Compiler",
+            swift: "Swift Online Compiler",
+            golang: "Go Online Compiler",
         };
 
         // Update title for logo
@@ -42,6 +46,8 @@
             java: "Main.java",
             javascript: "Main.js",
             cpp: "main.cpp",
+            swift: "main.swift",
+            golang: "main.go",
         };
 
         // Name display

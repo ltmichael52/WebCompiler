@@ -15,7 +15,7 @@ const validExtensions = {
     javascript: ".js",
     cpp: ".cpp",
     swift: ".swift",
-    go: ".go"
+    golang: ".go"
 };
 
 // Hàm để kiểm tra file có hợp lệ không
@@ -32,7 +32,7 @@ document.getElementById('fileInput').addEventListener('change', function (event)
             alert(`Invalid file type! Please upload a file with extension ${validExtensions[language]}.`);
             return; // Dừng lại nếu file không hợp lệ
         }
-
+        /*uploadFileName = file.name;*/
         const reader = new FileReader();
         reader.onload = function (e) {
             const content = e.target.result;
