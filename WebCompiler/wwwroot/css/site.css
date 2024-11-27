@@ -7,6 +7,10 @@ html {
     font-size: 14px;
 }
 
+#root{
+    width:50%;
+}
+
 @media (min-width: 768px) {
     html {
         font-size: 16px;
@@ -142,6 +146,7 @@ body {
     border-radius: 2px;
     border: 1px solid #d3dce6;
     background: none;
+    fill: #25265eab;
     color: #25265eab;
     cursor: pointer;
     padding: 6px;
@@ -160,10 +165,6 @@ body {
 
 #fileInput {
     display: none;
-}
-
-.upload-button:hover {
-    border-color: #ffffff;
 }
 
 .dark-mode .upload-button {
@@ -201,11 +202,12 @@ body {
     font-size: 14px;
     line-height: 20px;
     margin-left: 16px;
-    width: 32px; 
+    width: 32px;
     height: 32px;
     border-radius: 2px;
     border: 1px solid #d3dce6;
     background: none;
+    fill: #25265eab;
     color: #25265eab;
     cursor: pointer;
     padding: 6px;
@@ -215,10 +217,6 @@ body {
     width: 15px !important;
     height: 15px !important;
     display: block;
-}
-
-.download-button:hover {
-    border-color: #ffffff;
 }
 
 .dark-mode .download-button {
@@ -507,4 +505,20 @@ body {
         width: 70.8px;
         height: 50.6px;
     }
+}
+
+/*Dark light for the download & compile history*/
+.dark-mode .download-icon.svg {
+    fill: #ffffff; /*SVG*/
+    color: #ffffff; /*text*/
+}
+
+.dark-mode .save-icon {
+    fill: #ffffff; /*SVG*/
+    color: #ffffff; /*text*/
+}
+
+.save-icon {
+    fill: #25265eab;
+    color: #25265eab;
 }

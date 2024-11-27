@@ -2,7 +2,7 @@
 /* Overlay */
 /* Overlay */
 /* Overlay */
-.custom-modal-overlay {
+.dark-mode .custom-modal-overlay {
     display: none;
     position: fixed;
     top: 0;
@@ -16,7 +16,7 @@
 }
 
 /* Modal Content */
-.custom-modal-content {
+.dark-mode .custom-modal-content {
     width: 80%;
     max-width: 500px;
     background-color: #1e1e2f; /* Dark background color */
@@ -27,13 +27,136 @@
 }
 
 /* Header */
-.custom-modal-header {
+.dark-mode .custom-modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 16px;
     background-color: #28293e; /* Slightly lighter for header contrast */
     color: #ffffff; /* White text color */
+}
+
+.dark-mode .custom-modal-title {
+    font-size: 18px;
+    margin: 0;
+}
+
+/* Close Button */
+.dark-mode .custom-close-btn {
+    background: none;
+    border: none;
+    color: #ffffff; /* White color for close button */
+    font-size: 24px;
+    cursor: pointer;
+}
+
+    /* Close button hover */
+    .dark-mode .custom-close-btn:hover {
+        color: #ff6b6b; /* Soft red color for better visibility */
+    }
+
+/* Body */
+.dark-mode .custom-modal-body {
+    padding: 16px;
+    color: #cfcfd5; /* Light gray for readability */
+}
+
+/* Input Label */
+.dark-mode .title-label {
+    display: block;
+    margin-bottom: 8px;
+    color: #ffffff; /* White color for label */
+}
+
+/* Input Field */
+.dark-mode .title-input {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #55576a; /* Neutral border */
+    border-radius: 4px;
+    background-color: #28293e; /* Dark background for the input */
+    color: #ffffff; /* White text color for input */
+}
+
+    /* Input Field Focus Effect */
+    .dark-mode .title-input:focus {
+        border-color: #ffffff; /* Change border color to white on focus */
+        outline: none; /* Remove default outline */
+        background-color: #353843; /* Slightly lighter background on focus */
+    }
+
+/* Footer */
+.dark-mode .custom-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 16px;
+    background-color: #28293e; /* Same color as header */
+}
+
+/* Close Button in Footer */
+.dark-mode .custom-modal-close-btn, .custom-modal-save-btn {
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #ffffff; /* White color for buttons */
+    border: none;
+    border-radius: 4px;
+}
+
+/* Save Button */
+.dark-mode .custom-modal-save-btn {
+    background-color: #4a4a4a; /* Dark gray for primary action */
+    color: #ffffff; /* White text */
+}
+
+    .dark-mode .custom-modal-save-btn:hover {
+        background-color: #666666; /* Lighter gray on hover */
+    }
+
+/* Close Button in Footer */
+.dark-mode .custom-modal-close-btn {
+    background-color: #55576a; /* Neutral dark gray */
+}
+
+    .dark-mode .custom-modal-close-btn:hover {
+        background-color: #424456; /* Slightly darker on hover */
+    }
+
+/* Modal popup */
+/* Overlay */
+.custom-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Lighter overlay */
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Modal Content */
+.custom-modal-content {
+    width: 80%;
+    max-width: 500px;
+    background-color: #ffffff; /* Light background color */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    color: #333333; /* Dark text color */
+    overflow: hidden;
+}
+
+/* Header */
+.custom-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background-color: #f5f5f5; /* Light gray for header contrast */
+    color: #333333; /* Dark text color */
 }
 
 .custom-modal-title {
@@ -45,44 +168,44 @@
 .custom-close-btn {
     background: none;
     border: none;
-    color: #ffffff; /* White color for close button */
+    color: #333333; /* Dark color for close button */
     font-size: 24px;
     cursor: pointer;
 }
 
     /* Close button hover */
     .custom-close-btn:hover {
-        color: #ff6b6b; /* Soft red color for better visibility */
+        color: #ff6b6b; /* Soft red for better visibility */
     }
 
 /* Body */
 .custom-modal-body {
     padding: 16px;
-    color: #cfcfd5; /* Light gray for readability */
+    color: #555555; /* Medium gray for readability */
 }
 
 /* Input Label */
 .title-label {
     display: block;
     margin-bottom: 8px;
-    color: #ffffff; /* White color for label */
+    color: #333333; /* Dark color for label */
 }
 
 /* Input Field */
 .title-input {
     width: 95%;
     padding: 10px;
-    border: 1px solid #55576a; /* Neutral border */
+    border: 1px solid #cccccc; /* Light border */
     border-radius: 4px;
-    background-color: #28293e; /* Dark background for the input */
-    color: #ffffff; /* White text color for input */
+    background-color: #f9f9f9; /* Light background for input */
+    color: #333333; /* Dark text color */
 }
 
     /* Input Field Focus Effect */
     .title-input:focus {
-        border-color: #ffffff; /* Change border color to white on focus */
+        border-color: #333333; /* Darker border on focus */
         outline: none; /* Remove default outline */
-        background-color: #353843; /* Slightly lighter background on focus */
+        background-color: #ffffff; /* White background on focus */
     }
 
 /* Footer */
@@ -91,34 +214,34 @@
     justify-content: flex-end;
     gap: 8px;
     padding: 16px;
-    background-color: #28293e; /* Same color as header */
+    background-color: #f5f5f5; /* Same as header */
 }
 
-/* Close Button in Footer */
+/* Buttons */
 .custom-modal-close-btn, .custom-modal-save-btn {
     padding: 8px 16px;
     font-size: 14px;
     cursor: pointer;
-    color: #ffffff; /* White color for buttons */
     border: none;
     border-radius: 4px;
 }
 
 /* Save Button */
 .custom-modal-save-btn {
-    background-color: #4a4a4a; /* Dark gray for primary action */
+    background-color: #007bff; /* Light blue for primary action */
     color: #ffffff; /* White text */
 }
 
     .custom-modal-save-btn:hover {
-        background-color: #666666; /* Lighter gray on hover */
+        background-color: #0056b3; /* Darker blue on hover */
     }
 
 /* Close Button in Footer */
 .custom-modal-close-btn {
-    background-color: #55576a; /* Neutral dark gray */
+    background-color: #dddddd; /* Light gray */
+    color: #333333; /* Dark text */
 }
 
     .custom-modal-close-btn:hover {
-        background-color: #424456; /* Slightly darker on hover */
+        background-color: #bbbbbb; /* Slightly darker gray */
     }

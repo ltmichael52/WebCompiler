@@ -1,8 +1,8 @@
 ﻿.sidebar-wrapper {
-    height: 85vh; /* Full viewport height */
-    overflow-y: scroll !important; /* Force vertical scroll to always show */
-    scrollbar-width: thin !important; /* Override default scrollbar hiding */
-    scrollbar-color: #474a4f #2d2f33 !important; /* Custom scrollbar colors (thumb and track) */
+    height: 85vh;
+    overflow-y: scroll !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: #c0c0c0 #f0f0f0 !important; /* Light thumb and track colors */
 }
 
     /* Custom Scrollbar Style */
@@ -12,17 +12,46 @@
 
     /* Scrollbar track (background) */
     .sidebar-wrapper::-webkit-scrollbar-track {
-        background-color: #2d2f33 !important; /* Background color for scrollbar track */
+        background-color: #f0f0f0 !important; /* Light background */
         border-radius: 10px !important;
     }
 
     /* Scrollbar thumb (the moving part) */
     .sidebar-wrapper::-webkit-scrollbar-thumb {
-        background-color: #474a4f !important;
+        background-color: #c0c0c0 !important; /* Gray thumb */
         border-radius: 10px !important;
     }
 
         .sidebar-wrapper::-webkit-scrollbar-thumb:hover {
+            background-color: #a0a0a0 !important; /* Darker gray on hover */
+        }
+
+
+.dark-mode .sidebar-wrapper {
+    height: 85vh; /* Full viewport height */
+    overflow-y: scroll !important; /* Force vertical scroll to always show */
+    scrollbar-width: thin !important; /* Override default scrollbar hiding */
+    scrollbar-color: #474a4f #2d2f33 !important; /* Custom scrollbar colors (thumb and track) */
+}
+
+    /* Custom Scrollbar Style */
+    .dark-mode .sidebar-wrapper::-webkit-scrollbar {
+        width: 10px !important;
+    }
+
+    /* Scrollbar track (background) */
+    .dark-mode .sidebar-wrapper::-webkit-scrollbar-track {
+        background-color: #2d2f33 !important; /* Background color for scrollbar track */
+        border-radius: 10px !important;
+    }
+
+    /* Scrollbar thumb (the moving part) */
+    .dark-mode .sidebar-wrapper::-webkit-scrollbar-thumb {
+        background-color: #474a4f !important;
+        border-radius: 10px !important;
+    }
+
+        .dark-mode .sidebar-wrapper::-webkit-scrollbar-thumb:hover {
             background-color: #63676c !important;
         }
 
@@ -37,7 +66,7 @@
     align-items: center; /* Center items vertically */
 }
 
-.select-box {
+.dark-mode .select-box {
     display: flex;
     align-items: center;
     background-color: #383b40;
@@ -45,7 +74,32 @@
     border: 1px solid #ced4da;
     border-radius: 4px;
     cursor: pointer;
-    margin-left: 10px; /* Space between heading and select box */
+    margin-left: 10px;
+}
+
+.select-box {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.dark-mode .select-options {
+    font-weight: 20;
+    position: absolute;
+    top: calc(100% + 5px); /* Position just below the select box */
+    left: 0;
+    right: 0;
+    background-color: #383b40;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
 }
 
 .select-options {
@@ -54,7 +108,7 @@
     top: calc(100% + 5px); /* Position just below the select box */
     left: 0;
     right: 0;
-    background-color: #383b40;
+    background-color: #ffffff;
     border: 1px solid #ced4da;
     border-radius: 4px;
     z-index: 1000;
@@ -70,8 +124,12 @@
     transition: background-color 0.3s;
 }
 
-    .option:hover {
+    .dark-mode .option:hover {
         background-color: #0556f3;
+    }
+
+    .option:hover {
+        background-color: #f0f0f0;
     }
 
 ul {
@@ -80,9 +138,71 @@ ul {
 }
 
 /* History Box Styling */
-.history-box {
+.dark-mode .history-box {
     background-color: #2d2f33;
     border: 1px solid #474a4f;
+    border-radius: 10px;
+    margin: 10px 0; /* Adds space between each box */
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s;
+    font-size: 14px;
+}
+
+    .dark-mode .history-box i {
+        margin-right: 10px; /* Space between icon and text */
+    }
+
+    .dark-mode .history-box:hover {
+        background-color: #3b3e44; /* Change color on hover */
+    }
+
+/* .history-category is the container */
+.dark-mode .history-category {
+    display: flex; /* Use flexbox for horizontal alignment */
+    justify-content: space-between; /* Space the items between left and right */
+    align-items: center; /* Vertically center the items */
+    padding: 10px; /* Add some padding inside the container */
+    background-color: #2d2f33; /* Background color */
+    border: 1px solid #474a4f; /* Border color */
+    border-radius: 10px; /* Rounded corners */
+}
+
+/* Anchor tag styles */
+.dark-mode .history-category-atag {
+    color: #FFFFFF; /* Text color */
+    text-decoration: none; /* Remove underline */
+    display: flex; /* Make sure contents are aligned properly */
+    align-items: center; /* Vertically center items inside anchor tag */
+}
+
+    /* Ensure the first anchor (history link) has normal left alignment */
+    .dark-mode .history-category-atag:first-of-type {
+        margin-right: auto; /* Push the first anchor tag to the left */
+    }
+
+/* Close button styles */
+.dark-mode .close-btn {
+    margin-left: auto; /* Push this anchor to the right side */
+    color: #fa7272; /* Red color for the close icon */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+    /* Hover effect for the close icon */
+    .dark-mode .close-btn:hover .close-icon {
+        background-color: #a83232; /* Lighter red on hover for a better visual */
+        color: #ffffff; /* White icon color on hover */
+    }
+
+.dark-mode .history-box i {
+    margin-right: 10px; /* Space between icon and text */
+}
+
+/* History Box Styling */
+.history-box {
+    background-color: #ffffff; /* Light background */
+    border: 1px solid #cccccc; /* Light gray border */
     border-radius: 10px;
     margin: 10px 0; /* Adds space between each box */
     padding: 15px;
@@ -97,7 +217,7 @@ ul {
     }
 
     .history-box:hover {
-        background-color: #3b3e44; /* Change color on hover */
+        background-color: #f2f2f2; /* Slightly darker background on hover */
     }
 
 /* .history-category is the container */
@@ -106,14 +226,14 @@ ul {
     justify-content: space-between; /* Space the items between left and right */
     align-items: center; /* Vertically center the items */
     padding: 10px; /* Add some padding inside the container */
-    background-color: #2d2f33; /* Background color */
-    border: 1px solid #474a4f; /* Border color */
+    background-color: #ffffff; /* Light background color */
+    border: 1px solid #cccccc; /* Light gray border */
     border-radius: 10px; /* Rounded corners */
 }
 
 /* Anchor tag styles */
 .history-category-atag {
-    color: #FFFFFF; /* Text color */
+    color: #333333; /* Dark text color */
     text-decoration: none; /* Remove underline */
     display: flex; /* Make sure contents are aligned properly */
     align-items: center; /* Vertically center items inside anchor tag */
@@ -127,16 +247,92 @@ ul {
 /* Close button styles */
 .close-btn {
     margin-left: auto; /* Push this anchor to the right side */
-    color: #fa7272; /* Red color for the close icon */
+    color: #ff4d4d; /* Light red for the close icon */
     cursor: pointer; /* Change cursor to pointer on hover */
 }
 
     /* Hover effect for the close icon */
-    .close-btn:hover .close-icon{
-        background-color: #a83232; /* Lighter red on hover for a better visual */
-        color: #ffffff; /* White icon color on hover */
+    .close-btn:hover .close-icon {
+        background-color: #ffcccc; /* Lighter red on hover */
+        color: #ff0000; /* Bright red icon color on hover */
     }
 
 .history-box i {
     margin-right: 10px; /* Space between icon and text */
 }
+
+
+
+/*Dark - light mode toggle*/
+.dark-mode .langSideBar {
+    color: #ffffff;
+}
+
+.langSideBar {
+    color: #25265eab;
+}
+
+#selectOptions .option{
+    color:#ffffff;
+}
+
+.dark-mode #selectOptions .option {
+    color: #ffffff;
+}
+
+/*Select option scroll bar*/
+#selectOptions {
+    height: 85vh;
+    overflow-y: scroll !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: #c0c0c0 #f0f0f0 !important; /* Light thumb and track colors */
+}
+
+    /* Custom Scrollbar Style */
+    #selectOptions::-webkit-scrollbar {
+        width: 10px !important;
+    }
+
+    /* Scrollbar track (background) */
+    #selectOptions::-webkit-scrollbar-track {
+        background-color: #f0f0f0 !important; /* Light background */
+        border-radius: 10px !important;
+    }
+
+    /* Scrollbar thumb (the moving part) */
+    #selectOptions::-webkit-scrollbar-thumb {
+        background-color: #c0c0c0 !important; /* Gray thumb */
+        border-radius: 10px !important;
+    }
+
+        #selectOptions::-webkit-scrollbar-thumb:hover {
+            background-color: #a0a0a0 !important; /* Darker gray on hover */
+        }
+
+.dark-mode #selectOptions {
+    height: 85vh; /* Full viewport height */
+    overflow-y: scroll !important; /* Force vertical scroll to always show */
+    scrollbar-width: thin !important; /* Override default scrollbar hiding */
+    scrollbar-color: #474a4f #2d2f33 !important; /* Custom scrollbar colors (thumb and track) */
+}
+
+    /* Custom Scrollbar Style */
+    .dark-mode #selectOptions::-webkit-scrollbar {
+        width: 10px !important;
+    }
+
+    /* Scrollbar track (background) */
+    .dark-mode #selectOptions::-webkit-scrollbar-track {
+        background-color: #2d2f33 !important; /* Background color for scrollbar track */
+        border-radius: 10px !important;
+    }
+
+    /* Scrollbar thumb (the moving part) */
+    .dark-mode #selectOptions::-webkit-scrollbar-thumb {
+        background-color: #474a4f !important;
+        border-radius: 10px !important;
+    }
+
+        .dark-mode #selectOptions::-webkit-scrollbar-thumb:hover {
+            background-color: #63676c !important;
+        }
