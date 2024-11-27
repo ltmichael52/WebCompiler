@@ -55,5 +55,15 @@ namespace WebCompiler.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Swift Compiler
+        /// </summary>
+        [HttpGet("swift")]
+        public IActionResult Swift()
+        {
+            HttpContext.Session.SetString("language", "swift");
+            return View();
+        }
+
     }
 }
