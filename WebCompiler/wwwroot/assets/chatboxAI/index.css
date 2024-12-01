@@ -17,6 +17,7 @@
     overflow: hidden;
     font-family: Arial, sans-serif;
     display: none;
+   
 }
 
 .chat-header {
@@ -25,6 +26,7 @@
     font-weight: bold;
     text-align: center;
     border-bottom: 1px solid #ddd;
+    position: relative;
 }
 
 .chat-content {
@@ -37,9 +39,10 @@
 .chat-input {
     display: flex;
     border-top: 1px solid #ddd;
+
 }
 
-    .chat-input input {
+    .chat-input textarea {
         flex: 1;
         padding: 8px;
         border: none;
@@ -73,6 +76,7 @@
     cursor: pointer;
     font-size: 14px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  
 }
 
 /* Định dạng phần nội dung Markdown */
@@ -149,3 +153,34 @@
         overflow-y: auto; /* Cuộn riêng phần code */
         white-space: pre-wrap; /* Bọc dòng trong code */
     }
+.close-btn {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    color: #ff0000; /* Màu đỏ cho nút đóng */
+    cursor: pointer;
+}
+
+    .close-btn:hover {
+        color: #cc0000; /* Đổi màu khi hover */
+    }
+#askAIButton {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+    #askAIButton:hover {
+        background-color: #0056b3;
+    }
+.syntax-error {
+    background-color: rgba(255, 0, 0, 0.3); /* Red background for error */
+}

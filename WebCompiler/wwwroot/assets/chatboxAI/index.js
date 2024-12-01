@@ -3,7 +3,88 @@ function toggleChatBox() {
     const chatBox = document.getElementById('chatBox');
     chatBox.style.display = (chatBox.style.display === 'none' || chatBox.style.display === '') ? 'flex' : 'none';
 }
+document.addEventListener("DOMContentLoaded", function () {
+    const aceEditor = ace.edit("editor"); // Ensure you have an editor with this id or modify accordingly
 
+    // Handle text selection event
+    aceEditor.container.addEventListener('mouseup', function () {
+        const selectedText = aceEditor.getSelectedText();
+
+        // If text is selected
+        if (selectedText && selectedText.trim() !== "") {
+            showAskAIButton(selectedText);
+        } else {
+            hideAskAIButton();
+        }
+    });
+
+    // Show the Ask AI button
+    function showAskAIButton(selectedText) {
+        let askButton = document.getElementById("askAIButton");
+
+        if (!askButton) {
+            askButton = document.createElement("button");
+            askButton.id = "askAIButton";
+            askButton.innerText = "Ask AI";
+            askButton.style.position = "absolute";
+            askButton.style.zIndex = 1000;
+            askButton.onclick = function () {
+                openChatbotWithSelectedText(selectedText);
+                // Clear the selected text after using it
+                clearSelectedText();
+            };
+            document.body.appendChild(askButton);
+        }
+
+        // Position the button next to the selection
+        const rect = aceEditor.container.getBoundingClientRect();
+        const range = aceEditor.selection.getRange();
+        const start = aceEditor.renderer.textToScreenCoordinates(range.start.row, range.start.column);
+
+        askButton.style.top = `${rect.top + start.pageY}px`;
+        askButton.style.left = `${rect.left + start.pageX + 100}px`; // Adjust the offset for the button's appearance
+        askButton.style.display = 'block';
+    }
+
+    // Hide the Ask AI button
+    function hideAskAIButton() {
+        const askButton = document.getElementById("askAIButton");
+        if (askButton) {
+            askButton.style.display = 'none';
+        }
+    }
+
+    // Open chatbot with selected code
+    function openChatbotWithSelectedText(selectedText) {
+        const chatBox = document.getElementById("chatBox");
+        const chatInput = document.getElementById("chatInput");
+        toggleChatBox();
+        // Open the chat box if it's not open
+        if (chatBox.style.display === "none") {
+            chatBox.style.display = "block";
+        }
+
+        // Ensure the selected text is passed (use getValue() for the current editor content)
+        const editorContent = aceEditor.getValue(); // Current full content of the editor
+        const currentSelection = aceEditor.getSelectedText(); // This should be the selected part
+
+        // Log both the full editor content and selected text for debugging
+        console.log("Editor content:", editorContent);
+        console.log("Selected text:", currentSelection);
+
+        // If the selected text is not empty, set it as the chat input
+        if (currentSelection.trim() !== "") {
+            chatInput.value = currentSelection;
+        } else {
+            chatInput.value = ""; // In case no selection, clear the input
+        }
+    }
+
+    // Clear the selected text after the Ask AI button is clicked
+    function clearSelectedText() {
+        aceEditor.selection.clearSelection(); // Clears the selection in the editor
+    }
+});
 // Function to send the message
 async function sendMessage() {
     const input = document.getElementById('chatInput');
