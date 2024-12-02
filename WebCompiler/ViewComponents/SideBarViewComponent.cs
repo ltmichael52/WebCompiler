@@ -27,6 +27,7 @@ namespace WebCompiler.ViewComponents
             {
                 List<CompileHistory> cpHistory = _db.CompileHistories
                     .Where(c => c.AccountId == accountId)
+                    .OrderByDescending(x=>x.CompileDate)
                     .ToList();
 
                 return View("CompileHistory", cpHistory);

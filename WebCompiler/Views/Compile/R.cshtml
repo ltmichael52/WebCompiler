@@ -3,7 +3,7 @@
 <div class="editor-wrapper" id="root" data-lang="@Context.Session.GetString("language")">
     <div class="editor-desktop-top-bar">
         <div class="file-name">
-            main.py
+            main.r
         </div>
         <div class="desktop-top-bar__btn-wrapper">
             <!-- Fullscreen toggle button -->
@@ -58,11 +58,11 @@
         Run
     </button>
     
-    @if (Model ==null)
+    @if (Model.Content ==null)
     {
         <div id="editor">## Online R compiler to run R program online
-## Print "Try programiz.pro" message
-message @Html.Raw("<-")"Try programiz.pro"
+## Print "Try program SIU" message
+message @Html.Raw("<-")"Try program SIU"
 print(message)
     </div>
     }

@@ -5,14 +5,14 @@
     <div class="history-category history-box">
         <!-- First anchor tag on the left -->
         <a class="history-category-atag" asp-controller="CompileHistory" asp-action="showOldCompile" asp-route-compileId="@cpHistory.Id">
-            <i class="bi bi-clock-history"></i>@cpHistory.Title
+            <i class="bi bi-clock-history"></i>@cpHistory.Title 
         </a>
 
         <!-- Second anchor tag (close icon) on the right -->
-        <a class="history-category-atag close-btn" asp-controller="CompileHistory" asp-action="DeleteOldCompile" 
-        asp-route-compileId="@cpHistory.Id">
+        <a class="history-category-atag close-btnSideBar"  data-compileid="@cpHistory.Id">
             <i class="bi bi-x-circle close-icon"></i>
         </a>
+
     </div>
 
 }

@@ -36,6 +36,23 @@ $(document).off('click', '.custom-modal-save-btn').on('click', '.custom-modal-sa
         });
     }
 });
+$(document).on('click', '.close-btnSideBar', function (event) {
+    var id = this.dataset.compileid; // Correct way to access data-compileId
+    console.log("Delete now " + id); // Logs the ID from the dataset
+
+    $.ajax({
+        url: '/CompileHistory/DeleteOldCompile',
+        type: 'DELETE',
+        data: { compileId: id }, // Send id as part of the data
+        success: function (response) {
+            $('#compileHistorySection').html(response); // Update the section with response
+        },
+        error: function (xhr, status, error) {
+            console.error("Error saving compile history:", error);
+            alert("Failed to save compile history.");
+        }
+    });
+});
 
 function getEditorCode() {
     const editorLines = document.querySelectorAll('#editor .ace_line_group');

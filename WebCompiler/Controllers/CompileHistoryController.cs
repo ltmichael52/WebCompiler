@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
 using WebCompiler.Models;
 
 namespace WebCompiler.Services
@@ -40,24 +41,39 @@ namespace WebCompiler.Services
         public IActionResult showOldCompile(int compileId)
         {
 
-            CompileHistory? cpHistory = db.CompileHistories.FirstOrDefault(c => c.Id == compileId);
-            if (cpHistory == null)
+            CompileHistory? cpHistoryOld = db.CompileHistories.FirstOrDefault(c => c.Id == compileId);
+            if (cpHistoryOld == null)
             {
                 throw new Exception($"No CompileHistory found with ID {compileId}");
             }
-            HttpContext.Session.SetString("language", cpHistory.CodeLanguage);
-            switch (cpHistory.CodeLanguage)
+           
+            switch (cpHistoryOld.CodeLanguage)
             {
                 case "csharp":
-                    return View("~/Views/Compile/CSharp.cshtml", cpHistory);
+                    return RedirectToAction("Csharp", "Compile", new { oldCompileId = compileId });
+                case "python":
+                    return RedirectToAction("Python", "Compile", new { oldCompileId = compileId });
+                case "java":
+                    return RedirectToAction("Java", "Compile", new { oldCompileId = compileId });
+                case "javascript":
+                    return RedirectToAction("Javascript", "Compile", new { oldCompileId = compileId });
+                case "cpp":
+                    return RedirectToAction("Cpp", "Compile", new { oldCompileId = compileId });
+                case "r":
+                    return RedirectToAction("R", "Compile", new { oldCompileId = compileId });
+                case "golang":
+                    return RedirectToAction("Go", "Compile", new { oldCompileId = compileId });
+                default:
+                    return RedirectToAction("Swift", "Compile", new { oldCompileId = compileId });
             }
-            return View("~/Views/Compile/Python.cshtml", cpHistory);
 
         }
 
-        public IActionResult DeleteOldCompile(int compileId, string currentLanguage)
+        [HttpDelete]
+        public IActionResult DeleteOldCompile(int compileId)
         {
             CompileHistory? cpHistory = db.CompileHistories.FirstOrDefault(c => c.Id == compileId);
+            int accountId = HttpContext.Session.GetInt32("accountId") ?? 1;
             if (cpHistory == null)
             {
                 throw new Exception($"No CompileHistory found with ID {compileId}");
@@ -65,12 +81,8 @@ namespace WebCompiler.Services
             db.CompileHistories.Remove(cpHistory);
             db.SaveChanges();
 
-            switch (currentLanguage)
-            {
-                case "csharp":
-                    return View("~/Views/Compile/CSharp.cshtml");
-            }
-            return View("~/Views/Compile/Python.cshtml");
+            List<CompileHistory> cpList = db.CompileHistories.Where(x => x.AccountId == accountId).OrderByDescending(x => x.CompileDate).ToList();
+            return PartialView("~/Views/Shared/_CompileHistory.cshtml", cpList);
         }
 
 

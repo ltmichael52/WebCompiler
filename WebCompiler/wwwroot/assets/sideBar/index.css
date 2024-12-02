@@ -183,14 +183,14 @@ ul {
     }
 
 /* Close button styles */
-.dark-mode .close-btn {
+.dark-mode .close-btnSideBar {
     margin-left: auto; /* Push this anchor to the right side */
     color: #fa7272; /* Red color for the close icon */
     cursor: pointer; /* Change cursor to pointer on hover */
 }
 
     /* Hover effect for the close icon */
-    .dark-mode .close-btn:hover .close-icon {
+    .dark-mode .close-btnSideBar:hover .close-icon {
         background-color: #a83232; /* Lighter red on hover for a better visual */
         color: #ffffff; /* White icon color on hover */
     }
@@ -245,14 +245,14 @@ ul {
     }
 
 /* Close button styles */
-.close-btn {
+.close-btnSideBar {
     margin-left: auto; /* Push this anchor to the right side */
     color: #ff4d4d; /* Light red for the close icon */
     cursor: pointer; /* Change cursor to pointer on hover */
 }
 
     /* Hover effect for the close icon */
-    .close-btn:hover .close-icon {
+    .close-btnSideBar:hover .close-icon {
         background-color: #ffcccc; /* Lighter red on hover */
         color: #ff0000; /* Bright red icon color on hover */
     }
