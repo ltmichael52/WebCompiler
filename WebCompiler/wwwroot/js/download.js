@@ -30,6 +30,9 @@ document.getElementById('downloadButton').addEventListener('click', async functi
         case 'golang':
             fileExtension = '.go';
             break;
+        case 'r':
+            fileExtension = '.R';
+            break;
         default:
             fileExtension = '.txt'; // Mặc định nếu không xác định được ngôn ngữ
     }

@@ -12,6 +12,7 @@
             cpp: "C++ Online Compiler",
             swift: "Swift Online Compiler",
             golang: "Go Online Compiler",
+            r: "R Online Compiler"
         };
 
         // Update title for page
@@ -30,6 +31,7 @@
             cpp: "C++ Online Compiler",
             swift: "Swift Online Compiler",
             golang: "Go Online Compiler",
+            r: "R Online Compiler"
         };
 
         // Update title for logo
@@ -48,6 +50,7 @@
             cpp: "main.cpp",
             swift: "main.swift",
             golang: "main.go",
+            r: "main.r"
         };
 
         // Name display
